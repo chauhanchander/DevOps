@@ -1,5 +1,0 @@
-*~
-jboss_stack_provision_output/*
-postgres_stack_provision_output/*
-delete_vm_output/*
-*.retry
