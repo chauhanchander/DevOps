@@ -1,0 +1,115 @@
+---
+#Target infrastructure environment. sandbox, dev, or prod.  See environment_vars.yml for details on each env.
+target_environment: dev
+
+#Business Information for the CMDB
+cmdb_appname: Atlassian Crowd
+cmdb_business_owner: gfelice
+cmdb_business_owner_dept: EIT DevOps
+cmdb_tech_owner: gfelice
+cmdb_tech_owner_dept: EIT DevOps
+request_number: REQ12345
+
+#Notification info
+notify_from: "OST_Core_SA@cablevision.com (EIT Core Services)"
+notify_to: "dnieto@cablevision.com, servicetransition@cablevision.com, OST_Core_SA@cablevision.com, eitplatformops@cablevision.com, japgar@cablevision.com, kwasserb@cablevision.com, eitdevops@cablevision.com"
+notify_subject: "Newly provisioned assets from Ansible"
+
+#DNS names
+server1_hostname: cvldmytestvm.cscdev.com
+
+#Network name as defined in vSphere and environment_vars.yml to put VM on
+vm_network: dv-VLAN110
+
+#JBoss VM options
+vm_memsize: 6144
+vm_numcpus: 1
+disks:
+  appvg:
+    vg_name: appvg
+    device: /dev/sdb
+    disk_size_gb: 25
+lvols:
+  crowd:
+    lv_name: crowd
+    vg: appvg
+    lv_size: 59%VG
+    fs_type: ext4
+    mount_point: /opt/atlassian
+    owner: atlassian
+    group: atlassian
+    mode: 755
+  postgres:
+    lv_name: postgres
+    vg: appvg
+    lv_size: 39%VG
+    fs_type: ext4
+    mount_point: /var/lib/pgsql
+    owner: postgres
+    group: postgres
+    mode: 755
+
+#Users and groups to create
+user_accounts:
+  hnakka:
+    username: hnakka
+    uid: 470
+    gecos: Hari Nakka - EDM Core Services SA
+    home: /home/hnakka
+    shell: /bin/ksh
+    group: edmcor
+    groups: sshlogin
+    #you can generate an encrypted password using the "grub-crypt --sha-512" command. Below example is set to C0r3S3rv1c3s
+    passwordcrypt: $6$jO3imA/RtSQy.7Ll$/ZZpMyRrJ2mF.hxg4Qc/SjEYQxvQ.Apiie.NTBZYNxlFtAzKzyEfcC30rkXUOq0FD8YfKpaca/CmiJA4zAN790
+    #passwordcrypt: $6$XLHp2k2FoM3IMr5i$aKmwS7O7Yxg354Y2w2F9kVE5Jqe/PDN.nDj.DSHUbTd0pHkRt8DGZPl/s7O5drHoHF0.B0ma/zwaNWs/PYl1U1
+  cgadhe:
+    username: cgadhe
+    uid: 476
+    gecos: Chandra Shekar Gadhe - EDM Core Services SA
+    home: /home/cgadhe
+    shell: /bin/ksh
+    group: edmcor
+    groups: sshlogin
+    #you can generate an encrypted password using the "grub-crypt --sha-512" command. Below example is set to C0r3S3rv1c3s
+    #passwordcrypt: $6$XLHp2k2FoM3IMr5i$aKmwS7O7Yxg354Y2w2F9kVE5Jqe/PDN.nDj.DSHUbTd0pHkRt8DGZPl/s7O5drHoHF0.B0ma/zwaNWs/PYl1U1
+    passwordcrypt: $6$jO3imA/RtSQy.7Ll$/ZZpMyRrJ2mF.hxg4Qc/SjEYQxvQ.Apiie.NTBZYNxlFtAzKzyEfcC30rkXUOq0FD8YfKpaca/CmiJA4zAN790
+  emcalvin:
+    username: emcalvin
+    uid: 481
+    gecos: Eric McAlvin - EIT Architecture
+    home: /home/emcalvin
+    shell: /bin/bash
+    group: edmcor
+    groups: sshlogin
+    #you can generate an encrypted password using the "grub-crypt --sha-512" command. Below example is set to C0r3S3rv1c3s
+    #passwordcrypt: $6$XLHp2k2FoM3IMr5i$aKmwS7O7Yxg354Y2w2F9kVE5Jqe/PDN.nDj.DSHUbTd0pHkRt8DGZPl/s7O5drHoHF0.B0ma/zwaNWs/PYl1U1
+    passwordcrypt: $6$jO3imA/RtSQy.7Ll$/ZZpMyRrJ2mF.hxg4Qc/SjEYQxvQ.Apiie.NTBZYNxlFtAzKzyEfcC30rkXUOq0FD8YfKpaca/CmiJA4zAN790
+
+user_groups:
+  edmcor:
+    groupname: edmcor
+    gid: 400
+  atlassian:
+    groupname: atlassian
+    gid: 1000
+  postgres:
+    groupname: postgres
+    gid: 26
+
+service_accounts:
+  atlassian:
+    username: atlassian
+    uid: 1001
+    gecos: Atlassian App Login
+    home: /opt/atlassian
+    shell: /bin/bash
+    group: atlassian
+    groups:
+  postgres:
+    username: postgres
+    uid: 26
+    gecos: PostgreSQL Server
+    home: /var/lib/pgsql
+    shell: /bin/bash
+    group: postgres
+    groups:

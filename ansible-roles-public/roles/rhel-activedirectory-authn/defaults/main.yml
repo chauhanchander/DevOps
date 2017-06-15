@@ -1,0 +1,20 @@
+---
+kdc_realm_name: NDCVC.COM
+kdc_realm_netbios_name: NDCVC
+kdc_ticket_renew_interval: 15m
+kdc_ticket_lifetime: 8h
+kdc_rewew_lifetime: 7d
+kdc_ou: UNIX/Computers
+ad_access_filter: memberOf=CN={{ ansible_hostname }}_login,OU=Groups,OU=UNIX,DC=NDCVC,DC=COM
+ldap_user_search_filter: memberOf=CN={{ ansible_hostname }}_users,OU=Groups,OU=UNIX,DC=NDCVC,DC=COM
+ldap_group_search_filter: memberOf=CN={{ ansible_hostname }}_groups,OU=Groups,OU=UNIX,DC=NDCVC,DC=COM
+ldap_client_baseDN: DC=NDCVC,DC=COM
+ldap_client_uri: ldap://ndcvc.com
+override_homedir: /home/%u
+default_shell: /bin/bash
+kinit_username: override_this_var
+kinit_password: override_this_var
+#if your machine is behind a NAT, set to true and put the public IPs in here comma seperated. Openstack VMs will require this for example.
+additional_addresses: false
+#example additional addresses in this var below
+#additional_address: 10.10.10.10, 10.10.20.10

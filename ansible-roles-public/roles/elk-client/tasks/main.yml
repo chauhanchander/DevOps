@@ -1,0 +1,35 @@
+---
+  - name: Copy SSL Certificate from ELK Server
+    copy:
+      src=logstash-forwarder-{{ elkEnv }}.crt
+      dest=/etc/pki/tls/certs/
+      owner=root
+      group=root
+      mode=0644
+  
+  - name: Import filebeat GPG RPM Key
+    rpm_key: state=present key=http://packages.elastic.co/GPG-KEY-elasticsearch
+
+  - name: Add ia YUM repo for filebeat (logstash fowarder)
+    yum_repository:
+      name: beats
+      description: Elastic Beats Repository
+      baseurl: https://packages.elastic.co/beats/yum/el/$basearch
+      gpgkey: https://packages.elastic.co/GPG-KEY-elasticsearch
+      gpgcheck: yes
+      enabled: no
+
+  - name: Install filebeat (i.e. LogStash Forwarder)
+    yum: name=filebeat state=present enablerepo=beats
+
+  - name: Configure filebeat log sources
+    template:
+      src=filebeat-template.yml
+      dest=/etc/filebeat/filebeat.yml
+      owner=root
+      group=root
+      mode=0644
+    notify: restart filebeat
+
+  - name: Start and enable the filebeat service
+    service: name=filebeat state=started enabled=yes

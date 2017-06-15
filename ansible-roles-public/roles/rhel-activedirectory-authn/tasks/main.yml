@@ -1,0 +1,82 @@
+---
+
+- name: install the OS packages for SSSD and SSSD-ad for AD authN
+  yum: name={{ item }} state=installed
+  with_items:
+    - sssd
+    - krb5-workstation
+    - samba-common
+    - authconfig
+    - oddjob
+    - oddjob-mkhomedir
+    - openldap-clients
+
+- name: apply krb5.conf template
+  template:
+    src=krb5.conf
+    dest=/etc/krb5.conf
+    owner=root
+    group=root
+    mode=644
+
+- name: apply smb.conf template
+  template:
+    src=smb.conf
+    dest=/etc/samba/smb.conf
+    owner=root
+    group=root
+    mode=644
+
+- name: apply ldap.conf template. ldap client configured strictly for SysAdmin convienence and not needed for sssd to do the authN
+  template:
+    src=ldap.conf
+    dest=/etc/openldap/ldap.conf
+    owner=root
+    group=root
+    mode=644
+
+#TODO: use expect module when we are ready for Ansible 2.0 but it requires pexpect>=3.3 on the TARGET machine
+#- name: Run kinit to get ticket in prep to join computer to domain
+#  expect:
+#    command: kinit {{ kinit_username }}
+#    responses: 
+#      (?i)Password: "{{ kinit_password }}"
+
+#wierdly all the below commands have to be done in 1 shell call. Possibly due to a temp krb ticket that the subsequent commands rely upon.
+- name: Run kinit to get krb ticket then join domain then change default prinipal to the host
+  shell: echo "{{ kinit_password }}" | kinit {{ kinit_username }} && net ads join -k createcomputer={{ kdc_ou }} && kinit -k {{ ansible_hostname|upper }}$
+  args:
+    creates: /etc/krb5.keytab
+
+- name: run authconfig to enable sssd authN
+  command: /usr/sbin/authconfig --enablesssdauth --enablesssd --enablemkhomedir --update
+
+- name: apply sssd.conf template
+  template:
+    src=sssd.conf
+    dest=/etc/sssd/sssd.conf
+    owner=root
+    group=root
+    mode=600
+  notify: restart sssd
+
+- name: start and enable sssd service
+  service: name=sssd state=started enabled=yes
+
+- name: enable messagebus service for oddjob to work
+  service: name=messagebus state=started enabled=yes
+
+- name: enable and start oddjobd service
+  service: name=oddjobd state=started enabled=yes
+
+- name: disable nscd as it interferes with sssd caching
+  service: name=nscd state=stopped enabled=no
+  ignore_errors: True
+
+- name: remove sshlogin group directory from sshd_config as this replaces it
+  lineinfile:
+    dest=/etc/ssh/sshd_config
+    regexp="^AllowGroups [ ]*"
+    backrefs=yes
+    state=absent
+  notify: reload sshd

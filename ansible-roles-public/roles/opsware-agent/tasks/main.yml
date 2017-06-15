@@ -1,0 +1,25 @@
+---
+
+- name: Pull down the Opsware binary 
+  get_url:
+    url=http://172.16.14.187/data/media/software/opsware-agent-50.0.47280.2-linux-6SERVER-X86_64
+    dest=/var/tmp/
+    owner=root
+    group=root
+    mode=0755
+
+- name: Install opsware-agent 
+  command: /var/tmp/opsware-agent-50.0.47280.2-linux-6SERVER-X86_64 -s --opsw_gw_addr_list 10.128.69.54:3001 --force_full_hw_reg
+  
+
+- name: Start opsware-agent 
+  service: name=opsware-agent enabled=yes state=started
+
+
+
+
+
+
+
+
+

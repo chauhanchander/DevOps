@@ -1,0 +1,68 @@
+#############################################################################
+# Purpose: This script Starts/Stops Jboss 6 for SMART OV
+# Author: Chait Nelakanti 01/19/2011
+# Components:
+#############################################################################
+DATE=`/bin/date +'%Y/%m/%d %H:%M:%S'`; export DATE
+APP="SMART OV application"
+SOFTWARE="Jboss 6"
+SOFT_BASE="{{app_acct_home}}"
+USERID="{{app_acct_name}}"
+
+case "$1" in
+
+'start')
+
+        (echo $DATE "Starting $SOFTWARE for $APP...") > /dev/console
+	if [ `hostname` == "{{server1_hostname}}" ]
+        then
+          su - $USERID -c "jbserver1 start"
+        else
+          su - $USERID -c "jbserver2 start"
+        fi
+        ;;
+'stop')
+
+        (echo $DATE "Stopping $SOFTWARE for $APP...") > /dev/console
+        if [ `hostname` == "{{server1_hostname}}" ]
+	then
+          su - $USERID -c "jbserver1 kill"
+	else
+	  su - $USERID -c "jbserver2 kill"
+    	fi
+        ;;
+'deploy')
+
+        (echo $DATE "Deploying $SOFTWARE for $APP...") > /dev/console
+        if [ `hostname` == "{{server1_hostname}}" ]
+        then
+          su - $USERID -c "jbserver1 deploy $2"
+        else
+          su - $USERID -c "jbserver2 deploy $2"
+        fi
+        ;;
+'undeploy')
+
+        (echo $DATE "Undeploying $SOFTWARE for $APP...") > /dev/console
+        if [ `hostname` == "{{server1_hostname}}" ]
+        then
+          su - $USERID -c "jbserver1 undeploy $2"
+        else
+          su - $USERID -c "jbserver2 undeploy $2"
+        fi
+        ;;
+'redeploy')
+
+        (echo $DATE "Redeploying $SOFTWARE for $APP...") > /dev/console
+        if [ `hostname` == "{{server1_hostname}}" ]
+        then
+          su - $USERID -c "jbserver1 redeploy $2"
+        else
+          su - $USERID -c "jbserver2 redeploy $2"
+        fi
+        ;;
+*)
+echo "usage: `basename $0` {start|stop|deploy|undeploy|redeploy}"
+
+        ;;
+esac

@@ -1,0 +1,22 @@
+Warning: UAT Cluster rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com is using 3285 out of 9900
+Cluster-Watch@cablevision.com [Cluster-Watch@cablevision.com]
+Sent:	Wednesday, May 18, 2016 7:30 PM
+To:	
+EDM Strategic Database Services
+Hello Team,
+
+Your are requested to clean the Tables from Red Shift UAT Cluster Name: rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com  . It has already consumed 3285 tables Out of 9900 .
+
+Please drop / delete your all unwanted tables from Red shift DEV DB and purge. Let me know if you need any help or have any questions,
+
+The details are following 
+
+Cluster Type  =  UAT
+REDSHIFT_DBHOST= Warning
+REDSHIFT_DBPORT= rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com 
+REDSHIFT_DBNAME= 5453 
+
+The Redshift Cluster has total limit of 9900 and it has already consumed Total of 3285 Tables. Please do the needful.
+
+Thanks 
+Admin Team

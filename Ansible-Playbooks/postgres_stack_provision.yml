@@ -1,0 +1,124 @@
+#
+#STEP 1 - ADD DNS ENTRIES
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  roles:
+    - { role: dns-record, start_ip: '{{ vm_start_ip }}', end_ip: '{{ vm_end_ip }}', server_name: '{{ server1_hostname }}' }
+  tags:
+    - create_dns
+
+#STEP 2 - GET THE IPs FROM THE ABOVE STEP, PUT IN VARS, THEN CREATE VM
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  vars_files:
+    - postgres_stack_provision_vault.yml
+  pre_tasks:
+    - name: get server1 ip
+      command: dig +short  '{{ server1_hostname }}'
+      register: server1_ip
+  roles:
+    - { role: vsphere-guest, vm_name: '{{server1_hostname}}', ip_addr: '{{server1_ip.stdout}}', ip_mask: '{{ip_mask}}', ip_gateway: '{{ip_gateway}}', fqdn: '{{server1_hostname}}', vm_memsize: '{{vm_memsize}}', vm_numcpus: '{{vm_numcpus}}', vcenter_username: '{{ vcenter[vsphere_environment].username }}', vcenter_password: '{{ vcenter[vsphere_environment].password }}', tags: [ 'create_vm' ]  }
+
+#STEP 3 - WAIT UNTIL THE GUESTS ARE FULLY ONLINE AND SSH IS LISTENING
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: wait for server1
+      wait_for: host='{{server1_hostname}}' port=22 state=started
+  tags:
+    - wait_for_servers_to_be_up
+
+
+#STEP 4 - add more disks for DB and carve up the filesystems using LVM and create the postgres user and group.
+- hosts: newservers
+  user: ansible
+  sudo: True
+  pre_tasks:
+    - name: add_disk
+      connection: local
+      sudo: false
+      shell: ENV={{ vsphere_environment }} /home/ansible/ansible-dependencies/vsphere_guest_add_disk/vsphere_add_disk_to_guest.py -n '{{ server1_hostname }}' -d '{{ item.value.disk_size_gb }}' -s '{{ vsphere_datastore }}'
+      with_dict: '{{ disks }}'
+    - name: create_vg
+      lvg: vg='{{ item.value.vg_name }}' pvs='{{ item.value.device }}'
+      with_dict: '{{ disks }}'
+  tasks:
+    - name: create lv in the vg
+      lvol: vg='{{ item.value.vg }}' lv='{{ item.value.lv_name }}' size='{{ item.value.lv_size }}'
+      with_dict: '{{ lvols }}'
+    - name: create filesystem on the new lv
+      filesystem: fstype='{{ item.value.fs_type }}' dev=/dev/{{ item.value.vg }}/{{ item.value.lv_name }}
+      with_dict: '{{ lvols }}'
+    - name: mount the new filesystem and add to fstab
+      mount: name='{{ item.value.mount_point }}' src=/dev/{{ item.value.vg }}/{{ item.value.lv_name }} fstype='{{ item.value.fs_type }}' dump=1 passno=2 state=mounted
+      with_dict: '{{ lvols }}'
+    - name: Create dba group
+      group: name='{{postgres_group_name}}' gid='{{postgres_group_gid}}' state=present system=yes
+    - name: Create postgres user
+      user: name='{{postgres_user_name}}' comment="Postgres Application ID" home='{{postgres_user_home}}' group='{{postgres_group_name}}' shell='{{postgres_user_shell}}' uid='{{postgres_user_uid}}' system=yes state=present
+    - name: set the ownership of the new filesystem
+      file: path='{{ item.value.mount_point }}' owner='{{ item.value.owner }}' group='{{ item.value.group }}' mode='{{ item.value.mode }}'
+      with_dict: '{{ lvols }}'
+  tags:
+    - add_disk
+
+
+#STEP 5 - If ArchiveLog is True, add disks, vgs, lvs, and filesys to store the archive logs. Most of these steps are the same as STEP 4, but we could not pass in multiple dictionaries with conditionals to a task.
+- hosts: newservers
+  user: ansible
+  sudo: True
+  pre_tasks:
+    - name: add_disk
+      connection: local
+      sudo: false
+      shell: ENV={{ vsphere_environment }} /home/ansible/ansible-dependencies/vsphere_guest_add_disk/vsphere_add_disk_to_guest.py -n '{{ server1_hostname }}' -d '{{ item.value.disk_size_gb }}' -s '{{ vsphere_datastore }}'
+      with_dict: '{{ archivedisks }}'
+      when: enable_archivelog
+    - name: create_vg
+      lvg: vg='{{ item.value.vg_name }}' pvs='{{ item.value.device }}'
+      with_dict: '{{ archivedisks }}'
+      when: enable_archivelog
+  tasks:
+    - name: create lv in the vg
+      lvol: vg='{{ item.value.vg }}' lv='{{ item.value.lv_name }}' size='{{ item.value.lv_size }}'
+      with_dict: '{{ archivelvols }}'
+      when: enable_archivelog
+    - name: create filesystem on the new lv
+      filesystem: fstype='{{ item.value.fs_type }}' dev=/dev/{{ item.value.vg }}/{{ item.value.lv_name }}
+      with_dict: '{{ archivelvols }}'
+      when: enable_archivelog
+    - name: mount the new filesystem and add to fstab
+      mount: name='{{ item.value.mount_point }}' src=/dev/{{ item.value.vg }}/{{ item.value.lv_name }} fstype='{{ item.value.fs_type }}' dump=1 passno=2 state=mounted
+      with_dict: '{{ archivelvols }}'
+      when: enable_archivelog
+    - name: set the ownership of the new filesystem
+      file: path='{{ item.value.mount_point }}' owner='{{ item.value.owner }}' group='{{ item.value.group }}' mode='{{ item.value.mode }}'
+      with_dict: '{{ archivelvols }}'
+      when: enable_archivelog
+  tags:
+    - add_archivelog_disk
+
+#STEP 5 - Create DBA team members with proper sudo access
+- hosts: newservers
+  user: ansible
+  sudo: True
+  tasks:
+    - name: Create DBA team accounts
+      user: name='{{ item.value.username }}' comment='{{ item.value.gecos }}' home='{{ item.value.home }}' group='{{ item.value.group }}' shell='{{ item.value.shell }}' uid='{{ item.value.uid }}' password='{{ item.value.passwordcrypt  }}' update_password=on_create groups='{{ item.value.groups }}' state=present
+      with_dict: '{{ dba_members }}'
+    - name: Grant DBA team sudo access to postgres account and to restart postgres via init script
+      lineinfile: "dest=/etc/sudoers line='%dba ALL=(ALL) NOPASSWD: /bin/su - postgres, /etc/init.d/postgresql-9.4' insertafter='^ansible ' state=present"
+  tags:
+    - create_dba_accounts
+
+#STEP 6 - INSTALL POSTGRES ON THE NEW VMs
+- hosts: newservers
+  user: ansible
+  sudo: True
+  roles:
+    - postgresql-server
+  tags:
+    - apply_postgres_role

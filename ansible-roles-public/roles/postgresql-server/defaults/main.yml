@@ -1,0 +1,36 @@
+---
+server1_hostname: localhost.localdomain
+
+postgres_user_name: postgres
+postgres_user_uid: 33000
+postgres_user_shell: /bin/bash
+postgres_user_home: /var/lib/pgsql
+postgres_group_name: postgres
+postgres_group_gid: 33000
+
+pg_rpm_version: 9.4.5
+pgdata: /var/lib/pgsql/9.4/data/data
+tablespace_name: myapptablespace
+
+db_owner_username: ericsapp
+#you can generate the encrypted password using: 
+#python -c "import hashlib; print 'md5' + hashlib.md5('mypassword' + 'myusername').hexdigest()" - below one is mypassword for ericsapp
+db_owner_passwdcrypt: md5383dbaa55c809193c0181aa2bc216082
+
+db_name: ericsdb
+db_encoding: UTF8
+
+enable_archivelog: True
+max_wal_senders: 2
+wal_keep_segments: 10
+archivelog_dir: /var/lib/pgsql/9.4/archive
+
+log_directory: /var/lib/pgsql/9.4/log
+log_rotation_age: 7d
+log_rotation_size: 0
+log_connections: "on"
+log_disconnections: "on"
+log_statement: ddl
+
+temp_tablespace_dir: /var/lib/pgsql/9.4/temp
+

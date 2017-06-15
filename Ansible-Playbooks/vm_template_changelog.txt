@@ -1,0 +1,30 @@
+VM template changelog:
+
+1.) 05-25-2016 10:09 - TEMPLATE: ANSIBLE_RHEL6.7_05-25-2016_1009_VLAN110_DEV_TEMPLATE
+Remove the following user accounts from template:
+- smaddux
+- jvomacka
+- kgomes1
+- ddilwort
+- mhunt
+- mnoru
+- hnakka
+- aferro
+- lclaro
+- steegela
+- sbolla
+- syachava
+
+Remove agents from template (install via ansible):
+- Opsware
+- Eracent
+- legato-networker
+
+Add from directive to ansible authorized_keys (IP for DEV):
+from="172.16.110.44" ssh-rsa kfjsdflkjsadfjasd
+
+Modify ansible account gecos
+usermod -c "Ansible Service Account - Owner dder" ansible
+
+2.) 06-29-2016 11:00 - NEW TEMPLATE CREATED FOR DEV WITH NO NIC (clone from old DEV template): ANSIBLE_RHEL6.7_06-29-2016_1100_DEV_TEMPLATE
+Remove NIC from template. 

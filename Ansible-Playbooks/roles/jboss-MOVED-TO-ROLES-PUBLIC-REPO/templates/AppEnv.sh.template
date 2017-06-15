@@ -1,0 +1,86 @@
+#!/bin/sh
+
+###
+### To set a common profile and variables that will affect
+### every instance in this cluster change function myvariables
+### right below. For all possible variables definitions go to
+### http://ostweb:8080/CoreServices/Documentation/InHouse/BEA/blablabla
+### or take a look at resetall function down below
+###
+myvariables ()
+{
+CLUSTER_NAME={{app_name}}Cluster
+CLUSTER_MULTICAST={{jboss_multicast_addr}}
+CLUSTER_HOME=/appshr/jboss6/servers/{{app_name}}Cluster
+LOG_OUTPUT_DIR=$CLUSTER_HOME/logs
+JAVA_HOME=/appshr/jdk/jdk1.8.0_51
+JBOSS_HOME=/appshr/jboss6/jboss-eap-6.4/
+PATH=/appshr/jdk/jdk1.8.0_51/bin:/appshr/jboss6/jboss-eap-6.4/bin:$PATH
+default_port=`cat $CLUSTER_HOME/configuration/standalone-ha.xml | grep jboss.management.native.port | cut -d: -f2 | cut -c1,2,3,4,5`
+ADMIN_PORT=`cat $CLUSTER_HOME/configuration/standalone-ha.xml | grep jboss.management.native.port | cut -d: -f2 | cut -d} -f1`
+APP_D_HOME="/appshr/appdynamics"
+APP_D_LOGS=$LOG_OUTPUT_DIR/appd_logs
+
+
+JAVA_OPTS="-Xms1024m -Xmx1024m  -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Dsun.lang.ClassLoader.allowArraySyntax=true -Dsun.net.inetaddr.ttl=3600"
+
+export set JAVA_HOME JBOSS_HOME CLUSTER_HOME INSTANCE_NAME HOSTNAME CLUSTER_NAME CLUSTER_MULTICAST LOG_OUTPUT_DIR PATH JBOSS_CLASSPATH JAVA_OPTS ADMIN_PORT APP_D_HOME APP_D_LOGS
+
+}
+
+server1 ()
+{
+myvariables
+HOST=`hostname`
+HOSTNAME={{server1_hostname}}
+INSTANCE_NAME={{app_name}}Server1
+NODE=node1
+JAVA_OPTS="$JAVA_OPTS -javaagent:$APP_D_HOME/AppAgent/javaagent.jar -Dappdynamics.agent.applicationName="{{app_name}}-Ansible" -Dappdynamics.agent.tierName=${CLUSTER_NAME} -Dappdynamics.agent.nodeName=${INSTANCE_NAME}_${HOSTNAME} -Dappdynamics.agent.logs.dir=$APP_D_LOGS -Dappdynamics.agent.runtime.dir=$APP_D_LOGS -Djboss.modules.system.pkgs="org.jboss.byteman,com.singularity"" 
+export set HOSTNAME INSTANCE_NAME NODE JAVA_OPTS
+checkhost
+
+}
+
+server2 ()
+{
+myvariables
+HOST=`hostname`
+HOSTNAME={{server2_hostname}}
+INSTANCE_NAME={{app_name}}Server2
+NODE=node2
+JAVA_OPTS="$JAVA_OPTS -javaagent:$APP_D_HOME/AppAgent/javaagent.jar -Dappdynamics.agent.applicationName="{{app_name}}-Ansible" -Dappdynamics.agent.tierName=${CLUSTER_NAME} -Dappdynamics.agent.nodeName=${INSTANCE_NAME}_${HOSTNAME} -Dappdynamics.agent.logs.dir=$APP_D_LOGS -Dappdynamics.agent.runtime.dir=$APP_D_LOGS -Djboss.modules.system.pkgs="org.jboss.byteman,com.singularity"" 
+export set HOSTNAME INSTANCE_NAME NODE JAVA_OPTS
+checkhost
+}
+
+setcommon ()
+{
+###
+### Setting common profile that will affect every instance in this particular cluster"
+###
+myvariables
+}
+
+checkhost ()
+{
+if [ ${HOST} != "$HOSTNAME" ];
+then
+   echo
+   echo "Please run $0 on $NODE --- bye"
+   echo
+   exit 1
+fi
+}
+
+case "${1}" in
+1)
+        server1
+        ;;
+2)
+        server2
+        ;;
+*)
+        echo "Setting common Profile"
+        setcommon
+        ;;
+esac

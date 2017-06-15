@@ -1,0 +1,20 @@
+---	
+- name: Add YUM repo for Eitsysadmin
+  yum_repository:
+    name: eitsysadmin
+    description: Eitsysadmin Repository
+    baseurl: https://bamboo.cablevision.com/eitsysadmin/
+    gpgcheck: no
+    enabled: no
+
+- name: Install cfg2html agent
+  yum: name=cfg2html-linux state=present enablerepo=eitsysadmin
+
+- name: Create cfg2html agent output directory
+  file: 
+    path: /root/cfg2html-out/{{ ansible_date_time.month }}{{ ansible_date_time.day }}{{ ansible_date_time.year }} 
+    state: directory 
+    recurse: yes
+
+- name: Run the initial cfg2html 
+  shell: /usr/bin/cfg2html  -o /root/cfg2html-out/{{ ansible_date_time.month }}{{ ansible_date_time.day }}{{ ansible_date_time.year }}/    

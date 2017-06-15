@@ -1,0 +1,24 @@
+---
+request_number: REQ123345
+app_name: defaultapp
+app_acct_name: jbdefaultapp
+app_acct_uid: 41521
+app_acct_home: /appshr/jboss6/servers/defaultappCluster
+app_acct_shell: /bin/ksh
+appshr_extract_basedir: /appshr
+app_archivelog_path: /appshr/jboss6/servers/defaultappCluster/logs/archive
+jboss_user_name: jboss6
+jboss_user_uid: 33000
+jboss_user_shell: /bin/ksh
+jboss_user_home: /appshr/jboss6
+jboss_group_name: jboss6
+jboss_group_gid: 33000
+jboss_multicast_addr: 224.0.0.1
+jboss_multicast_port: 45000
+jboss_http_port: 8080
+jboss_realm_user: admin
+jboss_realm_password: changeme_n0w
+#the below vars are for clustering which this role is written to assume we are deploying these JBoss servers in a pair of 2 nodes. You must override these for session replication to work.
+#server1_hostname set to localhost.localdomain by default so it works for testing in Vagrant. When using this role you MUST set these 2 variables.
+server1_hostname: localhost.localdomain
+server2_hostname: override_this2

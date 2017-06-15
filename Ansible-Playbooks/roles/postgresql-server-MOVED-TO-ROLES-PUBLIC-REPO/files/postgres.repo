@@ -1,0 +1,5 @@
+[postgres]
+name=postgres
+baseurl=https://bamboo.cablevision.com/postgres
+enabled=no
+gpgcheck=no

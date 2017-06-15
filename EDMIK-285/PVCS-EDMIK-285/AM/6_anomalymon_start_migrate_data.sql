@@ -1,0 +1,1 @@
+SELECT am_anomalymon_migrate.migrate_anomalymon_tables('host=pgedm1p.cicnuemrayu5.us-east-1.rds.amazonaws.com port=5452 user=pgadmin password=xxxxxxxxx dbname=appworxmon');

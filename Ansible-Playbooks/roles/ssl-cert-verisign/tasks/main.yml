@@ -1,0 +1,8 @@
+---
+- name: generate Verisign SSL certificate
+  sudo: false
+  command: /home/ansible/ansible-dependencies/verisign_ssl_cert_purchase/verisign_purchase_ssl_certificate.py -k '{{key_file}}' -c '{{csr_file}}' -n '{{fqdn}}' -o '{{ou}}' -p '{{challenge_phrase}}' -t '{{cert_type}}' -s '{{server_type}}' -y '{{validity_period}}' -f '{{cert_file}}' -g '{{first_name}}' -l '{{last_name}}' -e '{{email}}' -d  
+  register: ssl_cert_output
+
+- name: Show SSL certificate generation output
+  debug: msg="SSL certificate generation output {{ ssl_cert_output.stdout }}"

@@ -1,0 +1,7 @@
+---
+- name: add_dns_record
+  sudo: false
+  shell: ENV={{ dns_environment }} /home/ansible/ansible-dependencies/dns_rest_client_py/add_dns_wrapper.sh '{{ start_ip }}' '{{end_ip}}' '{{server_name}}' 
+  register: new_host_ip
+- name: Show the IP we registered in DNS.
+  debug: msg="{{ server_name }} {{ new_host_ip.stdout }}"

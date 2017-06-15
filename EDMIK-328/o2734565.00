@@ -1,0 +1,1209 @@
+Body Started at Thu Jun 23 14:13:15 EDT 2016
+FILEID:1872669
+Process Id is 24320 on Thu Jun 23 14:13:15 EDT 2016
+
+===== JOB INFORMATION ==============================================
+Operator/Agent CVLUAWSBISAM1
+Queue          AM_RS_QUEUE
+batch_home     /appbisam/appworx
+jobid          2734565.00
+output         /appbisam/appworx/out
+file           b.2734565.00
+max run time   0
+min run time   0
+
+===== GENERAL INFORMATION ==========================================
+module         AWS_RS_CHECK_SCH_SPACE_RSAMP1
+job_number     28654
+chain_id       2734564
+application    AM_RS
+source         CV_EXECS
+app_path       /appbisam/DBA/scripts
+command_dir    
+program        /appbisam/DBA/scripts/schema_space_check.sh
+
+===== OUTPUT INFORMATION ===========================================
+user           bisamusr
+printer        
+copies         1
+function       STORE
+output req     N
+log run        Y
+
+===== LOGIN INFORMATION ============================================
+dbtype         
+login          
+netconnect     
+dbtype2        
+db_login2      
+net_connect2   
+sid            
+
+parameter file with masked password(s)
+rsamt1
+cvadmin
+********
+cvrsamt
+5453
+workmsmgr
+End of parameter file
+job pid 24320
+
++ export SERVER_NAME=rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com
++ SERVER_NAME=rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com
++ export PWD=/appbisam/DBA/scripts
++ PWD=/appbisam/DBA/scripts
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
++ export USER_NAME=cvadmin
++ USER_NAME=cvadmin
++ export PASS_WORD=Maint_L0ck
++ PASS_WORD=Maint_L0ck
++ export DB_NAME=cvrsamt
++ DB_NAME=cvrsamt
+++ which psql
++ export PSQL=/usr/bin/psql
++ PSQL=/usr/bin/psql
+++ which awk
++ export AWK=/bin/awk
++ AWK=/bin/awk
++ export SERVER_PORT=5453
++ SERVER_PORT=5453
+++ which mail
++ export MAIL=/bin/mail
++ MAIL=/bin/mail
++ export PGPASSWORD=Maint_L0ck
++ PGPASSWORD=Maint_L0ck
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
++ export MAILFILE=/tmp/schemamailviews
++ MAILFILE=/tmp/schemamailviews
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
+++ which tail
++ export TAIL=/usr/bin/tail
++ TAIL=/usr/bin/tail
+++ which cut
++ export CUT=/bin/cut
++ CUT=/bin/cut
++ export THRESHOLD=
++ THRESHOLD=
++ export SCHEMA_NAME=workmsmgr
++ SCHEMA_NAME=workmsmgr
+++ which sed
++ export SED=/bin/sed
++ SED=/bin/sed
+++ which chmod
++ export CHMOD=/bin/chmod
++ CHMOD=/bin/chmod
+++ which mkdir
++ export MKDIR=/bin/mkdir
++ MKDIR=/bin/mkdir
+++ which head
++ export HEAD=/usr/bin/head
++ HEAD=/usr/bin/head
+++ which mv
++ export MV=/bin/mv
++ MV=/bin/mv
+++ which paste
++ export PASTE=/usr/bin/paste
++ PASTE=/usr/bin/paste
+++ which column
++ export COLUMN=/usr/bin/column
++ COLUMN=/usr/bin/column
++ export LOGS_DIR=/appbisam/DBA/scripts/SERVER_LOGS
++ LOGS_DIR=/appbisam/DBA/scripts/SERVER_LOGS
+++ which cp
++ export COPY=/bin/cp
++ COPY=/bin/cp
+++ which echo
++ export ECHO=/bin/echo
++ ECHO=/bin/echo
++ /bin/mkdir -p /appbisam/DBA/scripts/SERVER_LOGS
++ /bin/chmod -R 755 /appbisam/DBA/scripts/SERVER_LOGS
++ '[' '!' -d /appbisam/DBA/scripts/SQLBACKUP ']'
++ '[' 6 -ne 6 ']'
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U cvadmin -d cvrsamt
++ export 'TOTAL_SIZE_PERCENTAGE= capacity_gbytes | used_gbytes | pcnt_space | free_gbytes 
+-----------------+-------------+------------+-------------
+          177192 |      103832 |      58.60 |       73360
+(1 row)'
++ TOTAL_SIZE_PERCENTAGE=' capacity_gbytes | used_gbytes | pcnt_space | free_gbytes 
+-----------------+-------------+------------+-------------
+          177192 |      103832 |      58.60 |       73360
+(1 row)'
+++ echo ' capacity_gbytes | used_gbytes | pcnt_space | free_gbytes 
+-----------------+-------------+------------+-------------
+          177192 |      103832 |      58.60 |       73360
+(1 row)'
+++ /bin/awk '{print $5}'
+++ /usr/bin/tail -n2
+++ /bin/cut -d. -f1
++ SIZE_USED_PERCENTAGE=58
+++ echo ' capacity_gbytes | used_gbytes | pcnt_space | free_gbytes 
+-----------------+-------------+------------+-------------
+          177192 |      103832 |      58.60 |       73360
+(1 row)'
+++ /bin/awk '{print $1}'
+++ /usr/bin/tail -n2
+++ /bin/cut -d. -f1
++ TOTAL_CLUSTER_SPACE='177192
+(1'
+++ echo ' capacity_gbytes | used_gbytes | pcnt_space | free_gbytes 
+-----------------+-------------+------------+-------------
+          177192 |      103832 |      58.60 |       73360
+(1 row)'
+++ /bin/awk '{print $3}'
+++ /usr/bin/tail -n2
+++ /bin/cut -d. -f1
++ TOTAL_SPACE_USED=103832
++ echo 'The Total cluster capacity is 177192
+(1 GB'
+The Total cluster capacity is 177192
+(1 GB
++ echo 'The used Cluster space is 103832 GB'
+The used Cluster space is 103832 GB
++ echo 'Percentage is crossing threshold'
+Percentage is crossing threshold
++ sql_creation_for_schema workmsmgr
+++ which mv
++ export MOVE=/bin/mv
++ MOVE=/bin/mv
++ '[' -e /appbisam/DBA/scripts/schemaspacecheck.sql.bak ']'
+++ /bin/sed -i.bak s/workmsmgr/workmsmgr/g /appbisam/DBA/scripts/schemaspacecheck.sql
++ export CREAT_SQL_SCHEMA_CHECK=
++ CREAT_SQL_SCHEMA_CHECK=
++ '[' -e /appbisam/DBA/scripts/schemasizecheck.sql.bak ']'
+++ /bin/mv /appbisam/DBA/scripts/schemaspacecheck.sql.bak /appbisam/DBA/scripts/schemaspacecheck.sql
++ export SEHEMAFILESQL=
++ SEHEMAFILESQL=
+++ /bin/sed -i.bak s/workmsmgr/workmsmgr/g /appbisam/DBA/scripts/schemasizecheck.sql
++ export CREATE_SCHEMA_SIZE=
++ CREATE_SCHEMA_SIZE=
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U cvadmin -d cvrsamt --file=/appbisam/DBA/scripts/schemaspacecheck.sql
++ export CHECK_SPACE=
++ CHECK_SPACE=
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U cvadmin -d cvrsamt --file=/appbisam/DBA/scripts/schemasizecheck.sql
++ export TOTAL_SIZE_OF_SCHEMA=
++ TOTAL_SIZE_OF_SCHEMA=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.workmsmgr.schemasize
+++ /bin/sed 1,2d
+++ /bin/sed '/^\s*$/d'
+++ /bin/awk '{print $3}'
++ export REMOVE_TOP_LINES_OF_SCHEMA=
++ REMOVE_TOP_LINES_OF_SCHEMA=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.workmsmgr.schemasize.clean
++ export TOTAL_SIZE_OF_SCHEMA=394
++ TOTAL_SIZE_OF_SCHEMA=394
++ echo 'The total Size of Schema is 394'
+The total Size of Schema is 394
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.sqloutput
+++ /bin/sed 1,2d
+++ /bin/awk '{print $9}'
++ REMOVE_TOP_LINES=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.sqloutput.records
+++ /bin/sed '/^\s*$/d'
++ REMOVE_BLANK_LINES=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.sqloutput
+++ /bin/sed 1,2d
+++ /bin/awk '{print $5}'
++ TABLE_NAME=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablename
+++ /bin/sed '/^\s*$/d'
++ TABLE_NAME=
+++ /bin/mv /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablename.clean /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablename
++ TABLE_NAME=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.sqloutput
+++ /bin/sed 1,2d
+++ /bin/awk '{print $7}'
++ SCHEMA_NAME=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.schemaname
+++ /bin/sed '/^\s*$/d'
++ SCHEMA_NAME=
+++ /bin/mv /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.schemaname.clean /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.schemaname
++ SCHEMA_NAME=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.sqloutput
+++ /bin/sed 1,2d
+++ /bin/awk '{print $17}'
++ TOTAL_TABLE_SPACE_GB=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablespaceingb
+++ /bin/sed '/^\s*$/d'
++ TOTAL_TABLE_SPACE_GB=
+++ /bin/mv /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablespaceingb.clean /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablespaceingb
++ TOTAL_TABLE_SPACE_GB=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.sqloutput
+++ /bin/sed 1,2d
+++ /bin/awk '{print $19}'
++ TOTAL_TABLE_SPACE_BYTES=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablespaceinbytes
+++ /bin/sed '/^\s*$/d'
++ TOTAL_TABLE_SPACE_BYTES=
+++ /bin/mv /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablespaceinbytes.clean /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablespaceinbytes
++ TOTAL_TABLE_SPACE_GB=
+++ /bin/cat /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.sqloutput.updated
+++ /usr/bin/uniq -c
++ COUNT_RECORDS_FOR_ID=
+++ /usr/bin/paste -d, /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.sqloutput.updated /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablename /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.schemaname /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablespaceingb /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablespaceinbytes
+++ /usr/bin/column -s '	' -t
++ CREATE_JOINT_FILE=
+++ /bin/sed -i 1iUser_Name,Table_Name,Schema_Name,Total_Space_in_GB,Total_space_in_Bytes /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv
++ INSERT_HEADING=
+++ /usr/bin/column -s '	' -t
+++ /usr/bin/paste /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.sqloutput.updated /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablename /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.schemaname /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablespaceingb /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.tablespaceinbytes
++ CREATE_TEXT_FILE=
++ IFS=' '
++ read -r -a myRecArray
++ echo 'Separating 3 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Separating 3 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /usr/bin/head -3 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /usr/bin/head -3 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ RECORD_SEPARATION_FOR_EMAIL=
++ echo ''
+
++ total_space=0
++ count=0
++ read value
++ read -r -a linecontent
++ echo sessions_track,workmsmgr,0,80740352
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo lkp_canary_table,workmsmgr,0,536870912
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo randy00,workmsmgr,0,671088640
++ let total_space=total_space+0
++ read value
+++ /bin/sed -i 1iTable_Name,Schema_Name,Table_Space_in_GB,Total_Table_Space_in_Bytes /appbisam/DBA/scripts/SERVER_LOGS/cnryusr.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv
++ INSERT_REPORT_HEADING=
+++ /bin/echo ', ,Total Space Used by user Tables in GB,0'
++ INSERT_SPACE_REPORT=
+++ /bin/echo ', ,Total_Size_of_Schema in GB,394'
++ INSERT_SCHEMA_SIZE=
++ echo 'Removing 3 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Removing 3 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /bin/sed -i 1,3d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+/bin/sed -i 1,3d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /bin/sed -i 1,3d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ REMOVE_FROM_FILE=
++ echo
+
++ echo 'send an email'
+send an email
++ '[' 394 ']'
+++ /appbisam/DBA/scripts/email_schema_space.sh rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com cvrsamt workmsmgr /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv /appbisam/DBA/scripts/SERVER_LOGS/cnryusr.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv cnryusr 394
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
++ export MAILFILE=/tmp/schemamailviews
++ MAILFILE=/tmp/schemamailviews
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
++ export MAIL_TO=csingh1@cablevision.com
++ MAIL_TO=csingh1@cablevision.com
++ export FROM=workmsmgr_watcher@cablevision.com
++ FROM=workmsmgr_watcher@cablevision.com
++ export PWD=/appbisam/DBA/scripts
++ PWD=/appbisam/DBA/scripts
++ '[' 7 -ne 7 ']'
++ declare -a attachments
++ attachments=("$4" "$5")
++ declare -a attargs
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ USER_SCHEMA_SIZE=394
+++ echo 0
++ export calculate=0
++ calculate=0
++ echo 'This is total in GB 0'
++ echo -n 'Hello cnryusr
+
+-----Please ignore this test email -----
+-----This is generated through spache watcher script-----
+
+Attached is report for AM/CMS rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com space report for the cvrsamt database and workmsmgr Schema. The Total size of schema workmsmgr is 0 GB.
+Please review your objects and remove any unnecessary to preserve free space on the Redshift Cluster.
+For objects not in your ownership, contact owner to remove. For application owned objects, open a Service Request to EIT DB Services with AM/CMS management approval to remove the object
+
+Thanks
+Admin Team'
++ /bin/cat /tmp/schemamailviews
++ /bin/mail -s ' AM/CMS WORKMSMGR (CVRSAMP) Space Report for rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com' -r workmsmgr_watcher@cablevision.com -a /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv -a /appbisam/DBA/scripts/SERVER_LOGS/cnryusr.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv csingh1@cablevision.com
++ export 'SEND_EMAIL_TO_USER=This is total in GB 0'
++ SEND_EMAIL_TO_USER='This is total in GB 0'
++ IFS=' '
++ read -r -a myRecArray
++ echo 'Separating 1 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Separating 1 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /usr/bin/head -1 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /usr/bin/head -1 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ RECORD_SEPARATION_FOR_EMAIL=
++ echo ''
+
++ total_space=0
++ count=0
++ read value
++ read -r -a linecontent
++ echo test_vacuum_full_t1_1,workmsmgr,0,954204160
++ let total_space=total_space+0
++ read value
+++ /bin/sed -i 1iTable_Name,Schema_Name,Table_Space_in_GB,Total_Table_Space_in_Bytes /appbisam/DBA/scripts/SERVER_LOGS/cvadmin.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv
++ INSERT_REPORT_HEADING=
+++ /bin/echo ', ,Total Space Used by user Tables in GB,0'
++ INSERT_SPACE_REPORT=
+++ /bin/echo ', ,Total_Size_of_Schema in GB,394'
++ INSERT_SCHEMA_SIZE=
++ echo 'Removing 1 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Removing 1 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /bin/sed -i 1,1d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+/bin/sed -i 1,1d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /bin/sed -i 1,1d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ REMOVE_FROM_FILE=
++ echo
+
++ echo 'send an email'
+send an email
++ '[' 394 ']'
+++ /appbisam/DBA/scripts/email_schema_space.sh rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com cvrsamt workmsmgr /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv /appbisam/DBA/scripts/SERVER_LOGS/cvadmin.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv cvadmin 394
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
++ export MAILFILE=/tmp/schemamailviews
++ MAILFILE=/tmp/schemamailviews
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
++ export MAIL_TO=csingh1@cablevision.com
++ MAIL_TO=csingh1@cablevision.com
++ export FROM=workmsmgr_watcher@cablevision.com
++ FROM=workmsmgr_watcher@cablevision.com
++ export PWD=/appbisam/DBA/scripts
++ PWD=/appbisam/DBA/scripts
++ '[' 7 -ne 7 ']'
++ declare -a attachments
++ attachments=("$4" "$5")
++ declare -a attargs
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ USER_SCHEMA_SIZE=394
+++ echo 0
++ export calculate=0
++ calculate=0
++ echo 'This is total in GB 0'
++ echo -n 'Hello cvadmin
+
+-----Please ignore this test email -----
+-----This is generated through spache watcher script-----
+
+Attached is report for AM/CMS rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com space report for the cvrsamt database and workmsmgr Schema. The Total size of schema workmsmgr is 0 GB.
+Please review your objects and remove any unnecessary to preserve free space on the Redshift Cluster.
+For objects not in your ownership, contact owner to remove. For application owned objects, open a Service Request to EIT DB Services with AM/CMS management approval to remove the object
+
+Thanks
+Admin Team'
++ /bin/cat /tmp/schemamailviews
++ /bin/mail -s ' AM/CMS WORKMSMGR (CVRSAMP) Space Report for rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com' -r workmsmgr_watcher@cablevision.com -a /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv -a /appbisam/DBA/scripts/SERVER_LOGS/cvadmin.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv csingh1@cablevision.com
++ export 'SEND_EMAIL_TO_USER=This is total in GB 0'
++ SEND_EMAIL_TO_USER='This is total in GB 0'
++ IFS=' '
++ read -r -a myRecArray
++ echo 'Separating 39 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Separating 39 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /usr/bin/head -39 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /usr/bin/head -39 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ RECORD_SEPARATION_FOR_EMAIL=
++ echo ''
+
++ total_space=0
++ count=0
++ read value
++ read -r -a linecontent
++ echo evd_test_11_during,workmsmgr,38,41473277952
++ let total_space=total_space+38
++ read value
++ read -r -a linecontent
++ echo evd_test_11,workmsmgr,25,26843545600
++ let total_space=total_space+25
++ read value
++ read -r -a linecontent
++ echo evd_test_11_after,workmsmgr,17,18560843776
++ let total_space=total_space+17
++ read value
++ read -r -a linecontent
++ echo evd_test_6,workmsmgr,6,6647971840
++ let total_space=total_space+6
++ read value
++ read -r -a linecontent
++ echo evd_test_10_during,workmsmgr,5,5502926848
++ let total_space=total_space+5
++ read value
++ read -r -a linecontent
++ echo evd_test_10,workmsmgr,3,3355443200
++ let total_space=total_space+3
++ read value
++ read -r -a linecontent
++ echo evd_test_16,workmsmgr,2,2818572288
++ let total_space=total_space+2
++ read value
++ read -r -a linecontent
++ echo evd_before_idx,workmsmgr,2,2147483648
++ let total_space=total_space+2
++ read value
++ read -r -a linecontent
++ echo evd_during_idx,workmsmgr,2,2147483648
++ let total_space=total_space+2
++ read value
++ read -r -a linecontent
++ echo evd_after_idx,workmsmgr,2,2147483648
++ let total_space=total_space+2
++ read value
++ read -r -a linecontent
++ echo evd_test_10_after,workmsmgr,2,2818572288
++ let total_space=total_space+2
++ read value
++ read -r -a linecontent
++ echo evd_test_7,workmsmgr,1,1610612736
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_10_idx_dur_d1n1_after,workmsmgr,1,1073741824
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_12,workmsmgr,1,1342177280
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_10_idx_dur_d1n1_during,workmsmgr,1,1073741824
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_15,workmsmgr,1,2013265920
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_after_idx_rnk,workmsmgr,1,1610612736
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_12_after,workmsmgr,1,1342177280
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_12_during,workmsmgr,1,1342177280
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_before_idx_rnk,workmsmgr,1,1610612736
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_15_after,workmsmgr,1,1879048192
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_15_during,workmsmgr,1,2013265920
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_14_during,workmsmgr,1,1610612736
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_14,workmsmgr,1,1610612736
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_14_after,workmsmgr,1,1610612736
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_during_idx_rnk,workmsmgr,1,1610612736
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_10_idx_dur_d1n1,workmsmgr,1,1073741824
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_4,workmsmgr,1,1610612736
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo evd_test_3,workmsmgr,0,160432128
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo evd_test_2_dur,workmsmgr,0,184549376
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo evd_test_9,workmsmgr,0,205520896
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo evd_test_13,workmsmgr,0,1065353216
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo evd_test_8,workmsmgr,0,842006528
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo evd_test_13_during,workmsmgr,0,1065353216
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo evd_test_1,workmsmgr,0,692060160
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo evd_test_13_after,workmsmgr,0,1065353216
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo evd_test_10_idx_dur_d1d1_during,workmsmgr,0,100663296
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo evd_test_10_idx_dur_d1d1_after,workmsmgr,0,100663296
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo evd_test_10_idx_dur_d1d1,workmsmgr,0,100663296
++ let total_space=total_space+0
++ read value
+++ /bin/sed -i 1iTable_Name,Schema_Name,Table_Space_in_GB,Total_Table_Space_in_Bytes /appbisam/DBA/scripts/SERVER_LOGS/cvamjobusr.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv
++ INSERT_REPORT_HEADING=
+++ /bin/echo ', ,Total Space Used by user Tables in GB,121'
++ INSERT_SPACE_REPORT=
+++ /bin/echo ', ,Total_Size_of_Schema in GB,394'
++ INSERT_SCHEMA_SIZE=
++ echo 'Removing 39 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Removing 39 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /bin/sed -i 1,39d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+/bin/sed -i 1,39d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /bin/sed -i 1,39d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ REMOVE_FROM_FILE=
++ echo
+
++ echo 'send an email'
+send an email
++ '[' 394 ']'
+++ /appbisam/DBA/scripts/email_schema_space.sh rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com cvrsamt workmsmgr /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv /appbisam/DBA/scripts/SERVER_LOGS/cvamjobusr.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv cvamjobusr 394
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
++ export MAILFILE=/tmp/schemamailviews
++ MAILFILE=/tmp/schemamailviews
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
++ export MAIL_TO=csingh1@cablevision.com
++ MAIL_TO=csingh1@cablevision.com
++ export FROM=workmsmgr_watcher@cablevision.com
++ FROM=workmsmgr_watcher@cablevision.com
++ export PWD=/appbisam/DBA/scripts
++ PWD=/appbisam/DBA/scripts
++ '[' 7 -ne 7 ']'
++ declare -a attachments
++ attachments=("$4" "$5")
++ declare -a attargs
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ USER_SCHEMA_SIZE=394
+++ echo 0
++ export calculate=0
++ calculate=0
++ echo 'This is total in GB 0'
++ echo -n 'Hello cvamjobusr
+
+-----Please ignore this test email -----
+-----This is generated through spache watcher script-----
+
+Attached is report for AM/CMS rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com space report for the cvrsamt database and workmsmgr Schema. The Total size of schema workmsmgr is 0 GB.
+Please review your objects and remove any unnecessary to preserve free space on the Redshift Cluster.
+For objects not in your ownership, contact owner to remove. For application owned objects, open a Service Request to EIT DB Services with AM/CMS management approval to remove the object
+
+Thanks
+Admin Team'
++ /bin/cat /tmp/schemamailviews
++ /bin/mail -s ' AM/CMS WORKMSMGR (CVRSAMP) Space Report for rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com' -r workmsmgr_watcher@cablevision.com -a /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv -a /appbisam/DBA/scripts/SERVER_LOGS/cvamjobusr.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv csingh1@cablevision.com
++ export 'SEND_EMAIL_TO_USER=This is total in GB 0'
++ SEND_EMAIL_TO_USER='This is total in GB 0'
++ IFS=' '
++ read -r -a myRecArray
++ echo 'Separating 21 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Separating 21 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /usr/bin/head -21 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /usr/bin/head -21 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ RECORD_SEPARATION_FOR_EMAIL=
++ echo ''
+
++ total_space=0
++ count=0
++ read value
++ read -r -a linecontent
++ echo tv_imp_6_month_attr,workmsmgr,25,27648851968
++ let total_space=total_space+25
++ read value
++ read -r -a linecontent
++ echo tv_imp_6_month,workmsmgr,25,27111981056
++ let total_space=total_space+25
++ read value
++ read -r -a linecontent
++ echo tv_mstr_tuning_2_percent_smpl,workmsmgr,4,4697620480
++ let total_space=total_space+4
++ read value
++ read -r -a linecontent
++ echo tv_mstr_tuning_2_percent_smpl_copy,workmsmgr,4,4697620480
++ let total_space=total_space+4
++ read value
++ read -r -a linecontent
++ echo tv_strat_sampling_table_ak,workmsmgr,2,2550136832
++ let total_space=total_space+2
++ read value
++ read -r -a linecontent
++ echo tv_mstr_tuning_smpl_qnique_stb_list,workmsmgr,2,2684354560
++ let total_space=total_space+2
++ read value
++ read -r -a linecontent
++ echo tv_past_data_smpl,workmsmgr,1,1073741824
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo tv_percent_strat_ak1,workmsmgr,1,2013265920
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo tv_x_data_smpl,workmsmgr,1,1073741824
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo tv_percent_strat_ak,workmsmgr,1,2013265920
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo tv_mstr_tuning_20160112_20160122_smpl,workmsmgr,1,1207959552
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo tv_imp_data_smpl,workmsmgr,1,1073741824
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo tv_weightage,workmsmgr,1,1073741824
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo tv_mstr_tuning_20160112_20160122_smpl1,workmsmgr,1,1207959552
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo tv_percent_strat_ak5,workmsmgr,1,2013265920
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo tv_mstr_tuning_20160112_20160122_smpl2,workmsmgr,1,1207959552
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo di_qnique_stb_list,workmsmgr,0,805306368
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo tv_imputed_stb_list,workmsmgr,0,671088640
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo tv_device_map,workmsmgr,0,671088640
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo tv_channel_desctemp,workmsmgr,0,471859200
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo tv_percent_data_smpl,workmsmgr,0,939524096
++ let total_space=total_space+0
++ read value
+++ /bin/sed -i 1iTable_Name,Schema_Name,Table_Space_in_GB,Total_Table_Space_in_Bytes /appbisam/DBA/scripts/SERVER_LOGS/jkrishna.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv
++ INSERT_REPORT_HEADING=
+++ /bin/echo ', ,Total Space Used by user Tables in GB,72'
++ INSERT_SPACE_REPORT=
+++ /bin/echo ', ,Total_Size_of_Schema in GB,394'
++ INSERT_SCHEMA_SIZE=
++ echo 'Removing 21 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Removing 21 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /bin/sed -i 1,21d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+/bin/sed -i 1,21d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /bin/sed -i 1,21d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ REMOVE_FROM_FILE=
++ echo
+
++ echo 'send an email'
+send an email
++ '[' 394 ']'
+++ /appbisam/DBA/scripts/email_schema_space.sh rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com cvrsamt workmsmgr /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv /appbisam/DBA/scripts/SERVER_LOGS/jkrishna.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv jkrishna 394
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
++ export MAILFILE=/tmp/schemamailviews
++ MAILFILE=/tmp/schemamailviews
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
++ export MAIL_TO=csingh1@cablevision.com
++ MAIL_TO=csingh1@cablevision.com
++ export FROM=workmsmgr_watcher@cablevision.com
++ FROM=workmsmgr_watcher@cablevision.com
++ export PWD=/appbisam/DBA/scripts
++ PWD=/appbisam/DBA/scripts
++ '[' 7 -ne 7 ']'
++ declare -a attachments
++ attachments=("$4" "$5")
++ declare -a attargs
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ USER_SCHEMA_SIZE=394
+++ echo 0
++ export calculate=0
++ calculate=0
++ echo 'This is total in GB 0'
++ echo -n 'Hello jkrishna
+
+-----Please ignore this test email -----
+-----This is generated through spache watcher script-----
+
+Attached is report for AM/CMS rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com space report for the cvrsamt database and workmsmgr Schema. The Total size of schema workmsmgr is 0 GB.
+Please review your objects and remove any unnecessary to preserve free space on the Redshift Cluster.
+For objects not in your ownership, contact owner to remove. For application owned objects, open a Service Request to EIT DB Services with AM/CMS management approval to remove the object
+
+Thanks
+Admin Team'
++ /bin/cat /tmp/schemamailviews
++ /bin/mail -s ' AM/CMS WORKMSMGR (CVRSAMP) Space Report for rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com' -r workmsmgr_watcher@cablevision.com -a /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv -a /appbisam/DBA/scripts/SERVER_LOGS/jkrishna.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv csingh1@cablevision.com
++ export 'SEND_EMAIL_TO_USER=This is total in GB 0'
++ SEND_EMAIL_TO_USER='This is total in GB 0'
++ IFS=' '
++ read -r -a myRecArray
++ echo 'Separating 3 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Separating 3 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /usr/bin/head -3 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /usr/bin/head -3 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ RECORD_SEPARATION_FOR_EMAIL=
++ echo ''
+
++ total_space=0
++ count=0
++ read value
++ read -r -a linecontent
++ echo bates_motel_s1_live_dvr_tuning,workmsmgr,2,2550136832
++ let total_space=total_space+2
++ read value
++ read -r -a linecontent
++ echo bates_motel_s1_live_dvr_vod,workmsmgr,1,1744830464
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo bates_motel_s1_vod,workmsmgr,1,1744830464
++ let total_space=total_space+1
++ read value
+++ /bin/sed -i 1iTable_Name,Schema_Name,Table_Space_in_GB,Total_Table_Space_in_Bytes /appbisam/DBA/scripts/SERVER_LOGS/ktseng.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv
++ INSERT_REPORT_HEADING=
+++ /bin/echo ', ,Total Space Used by user Tables in GB,4'
++ INSERT_SPACE_REPORT=
+++ /bin/echo ', ,Total_Size_of_Schema in GB,394'
++ INSERT_SCHEMA_SIZE=
++ echo 'Removing 3 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Removing 3 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /bin/sed -i 1,3d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+/bin/sed -i 1,3d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /bin/sed -i 1,3d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ REMOVE_FROM_FILE=
++ echo
+
++ echo 'send an email'
+send an email
++ '[' 394 ']'
+++ /appbisam/DBA/scripts/email_schema_space.sh rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com cvrsamt workmsmgr /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv /appbisam/DBA/scripts/SERVER_LOGS/ktseng.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv ktseng 394
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
++ export MAILFILE=/tmp/schemamailviews
++ MAILFILE=/tmp/schemamailviews
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
++ export MAIL_TO=csingh1@cablevision.com
++ MAIL_TO=csingh1@cablevision.com
++ export FROM=workmsmgr_watcher@cablevision.com
++ FROM=workmsmgr_watcher@cablevision.com
++ export PWD=/appbisam/DBA/scripts
++ PWD=/appbisam/DBA/scripts
++ '[' 7 -ne 7 ']'
++ declare -a attachments
++ attachments=("$4" "$5")
++ declare -a attargs
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ USER_SCHEMA_SIZE=394
+++ echo 0
++ export calculate=0
++ calculate=0
++ echo 'This is total in GB 0'
++ echo -n 'Hello ktseng
+
+-----Please ignore this test email -----
+-----This is generated through spache watcher script-----
+
+Attached is report for AM/CMS rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com space report for the cvrsamt database and workmsmgr Schema. The Total size of schema workmsmgr is 0 GB.
+Please review your objects and remove any unnecessary to preserve free space on the Redshift Cluster.
+For objects not in your ownership, contact owner to remove. For application owned objects, open a Service Request to EIT DB Services with AM/CMS management approval to remove the object
+
+Thanks
+Admin Team'
++ /bin/cat /tmp/schemamailviews
++ /bin/mail -s ' AM/CMS WORKMSMGR (CVRSAMP) Space Report for rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com' -r workmsmgr_watcher@cablevision.com -a /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv -a /appbisam/DBA/scripts/SERVER_LOGS/ktseng.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv csingh1@cablevision.com
++ export 'SEND_EMAIL_TO_USER=This is total in GB 0'
++ SEND_EMAIL_TO_USER='This is total in GB 0'
++ IFS=' '
++ read -r -a myRecArray
++ echo 'Separating 4 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Separating 4 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /usr/bin/head -4 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /usr/bin/head -4 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ RECORD_SEPARATION_FOR_EMAIL=
++ echo ''
+
++ total_space=0
++ count=0
++ read value
++ read -r -a linecontent
++ echo viewership_segments_master_bkp_01_22_2016,workmsmgr,12,12889096192
++ let total_space=total_space+12
++ read value
++ read -r -a linecontent
++ echo viewership_segments_master_nztmp,workmsmgr,11,12750684160
++ let total_space=total_space+11
++ read value
++ read -r -a linecontent
++ echo viewership_segments_master_bkp_20160108,workmsmgr,10,11127488512
++ let total_space=total_space+10
++ read value
++ read -r -a linecontent
++ echo hh_insertable_segments_master_nztmp,workmsmgr,5,5637144576
++ let total_space=total_space+5
++ read value
+++ /bin/sed -i 1iTable_Name,Schema_Name,Table_Space_in_GB,Total_Table_Space_in_Bytes /appbisam/DBA/scripts/SERVER_LOGS/rsadmin.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv
++ INSERT_REPORT_HEADING=
+++ /bin/echo ', ,Total Space Used by user Tables in GB,38'
++ INSERT_SPACE_REPORT=
+++ /bin/echo ', ,Total_Size_of_Schema in GB,394'
++ INSERT_SCHEMA_SIZE=
++ echo 'Removing 4 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Removing 4 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /bin/sed -i 1,4d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+/bin/sed -i 1,4d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /bin/sed -i 1,4d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ REMOVE_FROM_FILE=
++ echo
+
++ echo 'send an email'
+send an email
++ '[' 394 ']'
+++ /appbisam/DBA/scripts/email_schema_space.sh rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com cvrsamt workmsmgr /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv /appbisam/DBA/scripts/SERVER_LOGS/rsadmin.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv rsadmin 394
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
++ export MAILFILE=/tmp/schemamailviews
++ MAILFILE=/tmp/schemamailviews
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
++ export MAIL_TO=csingh1@cablevision.com
++ MAIL_TO=csingh1@cablevision.com
++ export FROM=workmsmgr_watcher@cablevision.com
++ FROM=workmsmgr_watcher@cablevision.com
++ export PWD=/appbisam/DBA/scripts
++ PWD=/appbisam/DBA/scripts
++ '[' 7 -ne 7 ']'
++ declare -a attachments
++ attachments=("$4" "$5")
++ declare -a attargs
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ USER_SCHEMA_SIZE=394
+++ echo 0
++ export calculate=0
++ calculate=0
++ echo 'This is total in GB 0'
++ echo -n 'Hello rsadmin
+
+-----Please ignore this test email -----
+-----This is generated through spache watcher script-----
+
+Attached is report for AM/CMS rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com space report for the cvrsamt database and workmsmgr Schema. The Total size of schema workmsmgr is 0 GB.
+Please review your objects and remove any unnecessary to preserve free space on the Redshift Cluster.
+For objects not in your ownership, contact owner to remove. For application owned objects, open a Service Request to EIT DB Services with AM/CMS management approval to remove the object
+
+Thanks
+Admin Team'
++ /bin/cat /tmp/schemamailviews
++ /bin/mail -s ' AM/CMS WORKMSMGR (CVRSAMP) Space Report for rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com' -r workmsmgr_watcher@cablevision.com -a /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv -a /appbisam/DBA/scripts/SERVER_LOGS/rsadmin.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv csingh1@cablevision.com
++ export 'SEND_EMAIL_TO_USER=This is total in GB 0'
++ SEND_EMAIL_TO_USER='This is total in GB 0'
++ IFS=' '
++ read -r -a myRecArray
++ echo 'Separating 7 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Separating 7 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /usr/bin/head -7 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /usr/bin/head -7 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ RECORD_SEPARATION_FOR_EMAIL=
++ echo ''
+
++ total_space=0
++ count=0
++ read value
++ read -r -a linecontent
++ echo t3n6,workmsmgr,1,1610612736
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo t3n5,workmsmgr,0,0
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo t3n4,workmsmgr,0,0
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo t3n2,workmsmgr,0,0
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo t3n1,workmsmgr,0,805306368
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo t3n3,workmsmgr,0,0
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo t3n6_1,workmsmgr,0,0
++ let total_space=total_space+0
++ read value
+++ /bin/sed -i 1iTable_Name,Schema_Name,Table_Space_in_GB,Total_Table_Space_in_Bytes /appbisam/DBA/scripts/SERVER_LOGS/sadhikes.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv
++ INSERT_REPORT_HEADING=
+++ /bin/echo ', ,Total Space Used by user Tables in GB,1'
++ INSERT_SPACE_REPORT=
+++ /bin/echo ', ,Total_Size_of_Schema in GB,394'
++ INSERT_SCHEMA_SIZE=
++ echo 'Removing 7 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Removing 7 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /bin/sed -i 1,7d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+/bin/sed -i 1,7d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /bin/sed -i 1,7d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ REMOVE_FROM_FILE=
++ echo
+
++ echo 'send an email'
+send an email
++ '[' 394 ']'
+++ /appbisam/DBA/scripts/email_schema_space.sh rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com cvrsamt workmsmgr /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv /appbisam/DBA/scripts/SERVER_LOGS/sadhikes.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv sadhikes 394
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
++ export MAILFILE=/tmp/schemamailviews
++ MAILFILE=/tmp/schemamailviews
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
++ export MAIL_TO=csingh1@cablevision.com
++ MAIL_TO=csingh1@cablevision.com
++ export FROM=workmsmgr_watcher@cablevision.com
++ FROM=workmsmgr_watcher@cablevision.com
++ export PWD=/appbisam/DBA/scripts
++ PWD=/appbisam/DBA/scripts
++ '[' 7 -ne 7 ']'
++ declare -a attachments
++ attachments=("$4" "$5")
++ declare -a attargs
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ USER_SCHEMA_SIZE=394
+++ echo 0
++ export calculate=0
++ calculate=0
++ echo 'This is total in GB 0'
++ echo -n 'Hello sadhikes
+
+-----Please ignore this test email -----
+-----This is generated through spache watcher script-----
+
+Attached is report for AM/CMS rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com space report for the cvrsamt database and workmsmgr Schema. The Total size of schema workmsmgr is 0 GB.
+Please review your objects and remove any unnecessary to preserve free space on the Redshift Cluster.
+For objects not in your ownership, contact owner to remove. For application owned objects, open a Service Request to EIT DB Services with AM/CMS management approval to remove the object
+
+Thanks
+Admin Team'
++ /bin/cat /tmp/schemamailviews
++ /bin/mail -s ' AM/CMS WORKMSMGR (CVRSAMP) Space Report for rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com' -r workmsmgr_watcher@cablevision.com -a /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv -a /appbisam/DBA/scripts/SERVER_LOGS/sadhikes.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv csingh1@cablevision.com
++ export 'SEND_EMAIL_TO_USER=This is total in GB 0'
++ SEND_EMAIL_TO_USER='This is total in GB 0'
++ IFS=' '
++ read -r -a myRecArray
++ echo 'Separating 14 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Separating 14 numbers of records from  /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /usr/bin/head -14 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /usr/bin/head -14 /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ RECORD_SEPARATION_FOR_EMAIL=
++ echo ''
+
++ total_space=0
++ count=0
++ read value
++ read -r -a linecontent
++ echo hh_network_aggr_viewing_hrs,workmsmgr,51,55566139392
++ let total_space=total_space+51
++ read value
++ read -r -a linecontent
++ echo hh_network_aggr_viewing,workmsmgr,51,55566139392
++ let total_space=total_space+51
++ read value
++ read -r -a linecontent
++ echo aggregate_viewing,workmsmgr,8,8858370048
++ let total_space=total_space+8
++ read value
++ read -r -a linecontent
++ echo viewership_segments_master,workmsmgr,6,6461325312
++ let total_space=total_space+6
++ read value
++ read -r -a linecontent
++ echo top_programs_master,workmsmgr,4,4563402752
++ let total_space=total_space+4
++ read value
++ read -r -a linecontent
++ echo hh_insertable_segments_master,workmsmgr,2,2544893952
++ let total_space=total_space+2
++ read value
++ read -r -a linecontent
++ echo yearly_pca_scoring_master,workmsmgr,1,1709178880
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo pricing_planning_cluster,workmsmgr,1,1879048192
++ let total_space=total_space+1
++ read value
++ read -r -a linecontent
++ echo test,workmsmgr,0,10485760
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo abc,workmsmgr,0,10485760
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo xref_pricing_planning_cluster,workmsmgr,0,5242880
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo ks_test1131048,workmsmgr,0,10485760
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo insertable_segment_scoring_master,workmsmgr,0,188743680
++ let total_space=total_space+0
++ read value
++ read -r -a linecontent
++ echo xyz,workmsmgr,0,0
++ let total_space=total_space+0
++ read value
+++ /bin/sed -i 1iTable_Name,Schema_Name,Table_Space_in_GB,Total_Table_Space_in_Bytes /appbisam/DBA/scripts/SERVER_LOGS/spssmodel.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv
++ INSERT_REPORT_HEADING=
+++ /bin/echo ', ,Total Space Used by user Tables in GB,124'
++ INSERT_SPACE_REPORT=
+++ /bin/echo ', ,Total_Size_of_Schema in GB,394'
++ INSERT_SCHEMA_SIZE=
++ echo 'Removing 14 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt'
+Removing 14 records from file /appbisam/DBA/scripts/SERVER_LOGS//appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ echo /bin/sed -i 1,14d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+/bin/sed -i 1,14d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
+++ /bin/sed -i 1,14d /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.txt
++ REMOVE_FROM_FILE=
++ echo
+
++ echo 'send an email'
+send an email
++ '[' 394 ']'
+++ /appbisam/DBA/scripts/email_schema_space.sh rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com cvrsamt workmsmgr /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv /appbisam/DBA/scripts/SERVER_LOGS/spssmodel.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv spssmodel 394
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
++ export MAILFILE=/tmp/schemamailviews
++ MAILFILE=/tmp/schemamailviews
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
++ export MAIL_TO=csingh1@cablevision.com
++ MAIL_TO=csingh1@cablevision.com
++ export FROM=workmsmgr_watcher@cablevision.com
++ FROM=workmsmgr_watcher@cablevision.com
++ export PWD=/appbisam/DBA/scripts
++ PWD=/appbisam/DBA/scripts
++ '[' 7 -ne 7 ']'
++ declare -a attachments
++ attachments=("$4" "$5")
++ declare -a attargs
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ for att in '"${attachments[@]}"'
++ attargs+=("-a" "$att")
++ USER_SCHEMA_SIZE=394
+++ echo 0
++ export calculate=0
++ calculate=0
++ echo 'This is total in GB 0'
++ echo -n 'Hello spssmodel
+
+-----Please ignore this test email -----
+-----This is generated through spache watcher script-----
+
+Attached is report for AM/CMS rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com space report for the cvrsamt database and workmsmgr Schema. The Total size of schema workmsmgr is 0 GB.
+Please review your objects and remove any unnecessary to preserve free space on the Redshift Cluster.
+For objects not in your ownership, contact owner to remove. For application owned objects, open a Service Request to EIT DB Services with AM/CMS management approval to remove the object
+
+Thanks
+Admin Team'
++ /bin/cat /tmp/schemamailviews
++ /bin/mail -s ' AM/CMS WORKMSMGR (CVRSAMP) Space Report for rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com' -r workmsmgr_watcher@cablevision.com -a /appbisam/DBA/scripts/SERVER_LOGS/rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.table_information.csv -a /appbisam/DBA/scripts/SERVER_LOGS/spssmodel.rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com.report.csv csingh1@cablevision.com
++ export 'SEND_EMAIL_TO_USER=This is total in GB 0'
++ SEND_EMAIL_TO_USER='This is total in GB 0'
++ IFS=' '
++ read -r -a myRecArray
+*****************************
+* Finished on Thu Jun 23 14:14:36 EDT 2016 with status FINISHED (FINISHED)
+
+*****************************
+awprint PRINTSIZE -j 2734565.00 -n o2734565.00 -d /appbisam/appworx/out
+Results from command:PRINTSIZE -j 2734565.00 -n /appbisam/appworx/out/o2734565.00 -d /appbisam/appworx/out
+Thu Jun 23 14:14:38 EDT 2016 Done with BODY

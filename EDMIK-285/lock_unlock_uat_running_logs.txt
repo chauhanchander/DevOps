@@ -1,0 +1,169 @@
+while IFS= read -r line; do echo "$(date) $line"; done > $(date).logs
+
+
+LOG_FILE=/home/csingh1/EDMIK-285-NEW/rsamt1_alter_enable_sql_run_2016.05.19-03.50.03.out
++ touch /home/csingh1/EDMIK-285-NEW/rsamt1_alter_enable_sql_run_2016.05.19-03.50.03.out
++ export ERR_FILE=/home/csingh1/EDMIK-285-NEW/rsamt1_alter_enable_sql_run_2016.05.19-03.50.03.err
++ ERR_FILE=/home/csingh1/EDMIK-285-NEW/rsamt1_alter_enable_sql_run_2016.05.19-03.50.03.err
++ export OUTFILE=/home/csingh1/EDMIK-285-NEW/rsamt1_alter_enable_users_list_2016.05.19-03.50.03.out
++ OUTFILE=/home/csingh1/EDMIK-285-NEW/rsamt1_alter_enable_users_list_2016.05.19-03.50.03.out
++ export TEMP_FILE=/home/csingh1/EDMIK-285-NEW/rsamt1_alter_enable_exclude_users_list_2016.05.19-03.50.03.tmp
++ TEMP_FILE=/home/csingh1/EDMIK-285-NEW/rsamt1_alter_enable_exclude_users_list_2016.05.19-03.50.03.tmp
++ export OUTFILENEW=/home/csingh1/EDMIK-285-NEW/rsamt1_alter_enable_users_list_2016.05.19-03.50.03.out-updated
++ OUTFILENEW=/home/csingh1/EDMIK-285-NEW/rsamt1_alter_enable_users_list_2016.05.19-03.50.03.out-updated
+++ /bin/sed -e 's/$/ VALID UNTIL \'\''2038-01-19\'\''/' rsamt1_alter_disable_users_list_2016.05.19-03.25.56.sql
++ export CREATE_ENABLE_SQL=SED_FILE3=
++ CREATE_ENABLE_SQL=SED_FILE3=
++ IFS=
++ read -r line
++ echo 'ALTER USER amckenz5 VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER amckenz5 VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER amckenz5 VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER anisbett VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER anisbett VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER anisbett VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER apalavil VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER apalavil VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER apalavil VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER ashaik VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER ashaik VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER ashaik VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER awadhwan VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER awadhwan VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER awadhwan VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER blin VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER blin VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER blin VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER ckulkarn VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER ckulkarn VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER ckulkarn VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER ctheodor VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER ctheodor VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER ctheodor VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER dnema VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER dnema VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER dnema VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER dsrivast VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER dsrivast VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER dsrivast VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER dthoma20 VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER dthoma20 VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER dthoma20 VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER eeng VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER eeng VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER eeng VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER eugenia VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER eugenia VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER eugenia VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER gprakash VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER gprakash VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER gprakash VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER hjaswal VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER hjaswal VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER hjaswal VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER hsingh5 VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER hsingh5 VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER hsingh5 VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER iniyazov VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER iniyazov VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER iniyazov VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER jalberda VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER jalberda VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER jalberda VALID UNTIL '\''2038-01-19'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER jglushak VALID UNTIL '\''2038-01-19'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER jglushak VALID UNTIL '\''2038-01-19'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER jglushak VALID UNTIL '\''2038-01-19'\'''
++ IFS=

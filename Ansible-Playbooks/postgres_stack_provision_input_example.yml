@@ -1,0 +1,149 @@
+---
+
+#SANDBOX network
+#vm_start_ip: 172.16.110.50
+#vm_end_ip: 172.16.110.54
+#ip_mask: 255.255.255.0
+#ip_gateway: 172.16.110.1
+
+#DEV network
+vm_start_ip: 172.16.20.128
+vm_end_ip: 172.16.20.207
+ip_mask: 255.255.255.0
+ip_gateway: 172.16.20.1
+
+#PROD network
+#vm_start_ip: 10.128.69.120
+#vm_end_ip: 10.128.69.139
+#vip_start_ip: 10.190.8.14
+#vip_end_ip: 10.190.8.23
+#ip_mask: 255.255.255.0
+#ip_gateway: 10.128.69.1
+
+#DEV vSphere
+vcenter_hostname: cscdbpvc1.ndcvc.com
+vcenter_resource_pool: /Resources
+vcenter_cluster: DevESXcl03
+vcenter_template: ANSIBLE_RHEL6.7_12-16-2015_1535_VLAN20_PROD_TEMPLATE
+#vcenter_template: ANSIBLE_RHEL6.7_12-07-2015_1540_VLAN110_DEV_TEMPLATE
+
+#PROD vSphere
+#vcenter_hostname: cscpbpvc1.cablevision.com
+#vcenter_template: ANSIBLE_RHEL6.7_12-16-2015_1535_VLAN20_PROD_TEMPLATE
+#vcenter_resource_pool: /Resources
+#vcenter_cluster: prodesxcl03
+#vsphere_datastore: Pcl3-Vol38-Ansible-V0910-0907
+
+#used for ansible-dependencies. Choose either dev or prod
+dns_environment: dev
+vsphere_environment: dev
+
+server1_hostname: erictestdb02.cscdev.com
+vm_memsize: 6144
+vm_numcpus: 1
+
+postgres_user_name: postgres
+postgres_user_uid: 33000
+postgres_user_shell: /bin/bash
+postgres_user_home: /var/lib/pgsql
+postgres_group_name: dba
+postgres_group_gid: 33000
+
+pg_rpm_version: 9.4.5
+pgdata: /var/lib/pgsql/9.4/data/data
+tablespace_name: myapptablespace
+db_owner_username: ericsapp
+#you can generate the encrypted password using: python -c "import hashlib; print 'md5' + hashlib.md5('mypassword' + 'myusername').hexdigest()" - below one is mypassword for ericsapp
+db_owner_passwdcrypt: md5383dbaa55c809193c0181aa2bc216082
+
+db_name: ericsdb
+db_encoding: UTF8
+
+dba_members:
+  lvoorhee:
+    username: lvoorhee
+    uid: 500
+    gecos: Lori Benowitz - EIT DBA
+    home: /home/lvoorhee
+    shell: /bin/bash
+    group: dba
+    groups: sshlogin
+    #you can generate an encrypted password using the "grub-crypt --sha-512" command. Below example is set to MyPassw0rd
+    passwordcrypt: $6$XLHp2k2FoM3IMr5i$aKmwS7O7Yxg354Y2w2F9kVE5Jqe/PDN.nDj.DSHUbTd0pHkRt8DGZPl/s7O5drHoHF0.B0ma/zwaNWs/PYl1U1
+
+enable_archivelog: True
+max_wal_senders: 2
+wal_keep_segments: 10
+archivelog_dir: /var/lib/pgsql/9.4/archive
+
+log_directory: /var/lib/pgsql/9.4/log
+log_rotation_age: 7d
+log_rotation_size: 0
+log_connections: "on"
+log_disconnections: "on"
+log_statement: ddl
+
+temp_tablespace_dir: /var/lib/pgsql/9.4/temp
+
+vsphere_datastore: Devcl3-Vol10-Ansible-7045-0799
+disks:
+  pgvg:
+    vg_name: pgvg
+    device: /dev/sdb
+    disk_size_gb: 3
+  pgdatavg:
+    vg_name: pgdatavg
+    device: /dev/sdc
+    disk_size_gb: 2
+archivedisks:
+  pgarchvg:
+    vg_name: pgarchvg
+    device: /dev/sdd
+    disk_size_gb: 2
+lvols:
+  pgbackup:
+    lv_name: pgbackup
+    vg: pgvg
+    lv_size: 25%VG
+    fs_type: ext4
+    mount_point: /var/lib/pgsql/9.4/backups
+    owner: postgres
+    group: dba
+    mode: 750
+  pgtemp:
+    lv_name: pgtemp
+    vg: pgvg
+    lv_size: 25%VG
+    fs_type: ext4
+    mount_point: /var/lib/pgsql/9.4/temp
+    owner: postgres
+    group: dba
+    mode: 750
+  pglog:
+    lv_name: pglog
+    vg: pgvg
+    lv_size: 100%FREE
+    fs_type: ext4
+    mount_point: /var/lib/pgsql/9.4/log
+    owner: postgres
+    group: dba
+    mode: 750
+  pgdata:
+    lv_name: pgdata
+    vg: pgdatavg
+    lv_size: 100%FREE
+    fs_type: ext4
+    mount_point: /var/lib/pgsql/9.4/data
+    owner: postgres
+    group: dba
+    mode: 700
+archivelvols:
+  pgarchive:
+    lv_name: pgarchive
+    vg: pgarchvg
+    lv_size: 100%VG
+    fs_type: ext4
+    mount_point: /var/lib/pgsql/9.4/archive
+    owner: postgres
+    group: dba
+    mode: 750

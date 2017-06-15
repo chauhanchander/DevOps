@@ -1,0 +1,1 @@
+select schema, sum(size)/1024 from svv_table_info where schema='workmsmgr' group by schema

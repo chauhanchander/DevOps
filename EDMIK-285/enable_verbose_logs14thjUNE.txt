@@ -1,0 +1,110 @@
+bisamusr@cvluawsbisam1:/appbisam/DBA/scripts> bash -x ./redshift_lock_unlock_dbusers.sh enable  rsamt1 5453 cvrsamt csingh1 CSingh_u4t rsamt1.Enable_latest_disabled_users.sql
++ export SERVER_NAME=rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com
++ SERVER_NAME=rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com
++ export SERVER_PORT=5453
++ SERVER_PORT=5453
++ export DB_NAME=cvrsamt
++ DB_NAME=cvrsamt
++ export USER_NAME=csingh1
++ USER_NAME=csingh1
++ export PASS_WORD=CSingh_u4t
++ PASS_WORD=CSingh_u4t
+++ which psql
++ export PSQL=/usr/bin/psql
++ PSQL=/usr/bin/psql
+++ which awk
++ export AWK=/bin/awk
++ AWK=/bin/awk
++ export PGPASSWORD=CSingh_u4t
++ PGPASSWORD=CSingh_u4t
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
+++ which tail
++ export TAIL=/usr/bin/tail
++ TAIL=/usr/bin/tail
+++ which grep
++ export GREP=/bin/grep
++ GREP=/bin/grep
++ export RUN_OPTION=enable
++ RUN_OPTION=enable
+++ which cut
++ export CUT=/bin/cut
++ CUT=/bin/cut
++ export CLUSTER_ID=rsamt1
++ CLUSTER_ID=rsamt1
++ export CLUSTER_NAME=rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com
++ CLUSTER_NAME=rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com
+++ which sed
++ export SED=/bin/sed
++ SED=/bin/sed
+++ which tr
++ export TR=/usr/bin/tr
++ TR=/usr/bin/tr
+++ date +%Y.%m.%d-%H.%M.%S
++ export TODAY=2016.06.14-00.23.57
++ TODAY=2016.06.14-00.23.57
+++ which mkdir
++ export MKDIR=/bin/mkdir
++ MKDIR=/bin/mkdir
+++ which chmod
++ export CHMOD=/bin/chmod
++ CHMOD=/bin/chmod
+++ which ln
++ export LN=/bin/ln
++ LN=/bin/ln
++ export PWD=/appbisam/DBA/scripts
++ PWD=/appbisam/DBA/scripts
++ '[' '!' -d /appbisam/DBA/scripts/DISABLE_LOGS ']'
++ '[' '!' -d PWD/ENABLE_LOGS ']'
+++ /bin/mkdir -p /appbisam/DBA/scripts/ENABLE_LOGS
++ CREATE_LOGS_DIR=
+++ /bin/chmod -R 755 /appbisam/DBA/scripts/DISABLE_LOGS
++ DIR_PERM=
++ '[' 7 -lt 6 ']'
++ case "$1" in
++ '[' 7 -eq 7 ']'
++ '[' -e rsamt1.Enable_latest_disabled_users.sql ']'
++ export enable=yes
++ enable=yes
++ export LOG_FILE=/appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_sql_run_2016.06.14-00.23.57.out
++ LOG_FILE=/appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_sql_run_2016.06.14-00.23.57.out
++ touch /appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_sql_run_2016.06.14-00.23.57.out
++ export ERR_FILE=/appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_sql_run_2016.06.14-00.23.57.err
++ ERR_FILE=/appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_sql_run_2016.06.14-00.23.57.err
++ export OUTFILE=/appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_users_list_2016.06.14-00.23.57.out
++ OUTFILE=/appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_users_list_2016.06.14-00.23.57.out
++ export TEMP_FILE=/appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_exclude_users_list_2016.06.14-00.23.57.tmp
++ TEMP_FILE=/appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_exclude_users_list_2016.06.14-00.23.57.tmp
++ export OUTFILENEW=/appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_users_list_2016.06.14-00.23.57.out-updated
++ OUTFILENEW=/appbisam/DBA/scripts/ENABLE_LOGS/rsamt1_alter_enable_users_list_2016.06.14-00.23.57.out-updated
+++ /bin/sed -e 's/$/ VALID UNTIL \'\''2024-01-19 00:00\'\''/' /appbisam/DBA/scripts/rsamt1.Enable_latest_disabled_users.sql
++ export CREATE_ENABLE_SQL_SED_FILE3=
++ CREATE_ENABLE_SQL_SED_FILE3=
++ IFS=
++ read -r line
++ echo 'ALTER USER acostanz VALID UNTIL '\''2024-01-19 00:00'\'''
+ALTER USER acostanz VALID UNTIL '2024-01-19 00:00'
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER acostanz VALID UNTIL '\''2024-01-19 00:00'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
+ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER acostanz VALID UNTIL '\''2024-01-19 00:00'\'''
+ALTER USER acostanz VALID UNTIL '2024-01-19 00:00'
++ IFS=
++ read -r line
++ echo 'ALTER USER august VALID UNTIL '\''2024-01-19 00:00'\'''
+ALTER USER august VALID UNTIL '2024-01-19 00:00'
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER august VALID UNTIL '\''2024-01-19 00:00'\'''
++ ENABLE_USERS='ALTER USER'
++ echo ALTER USER
+ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER august VALID UNTIL '\''2024-01-19 00:00'\'''
+ALTER USER august VALID UNTIL '2024-01-19 00:00'
++ IFS=
++ read -r line

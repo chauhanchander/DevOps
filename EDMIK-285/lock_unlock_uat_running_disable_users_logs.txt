@@ -1,0 +1,907 @@
+csingh1@cvluawsbisam1:/home/csingh1/EDMIK-285-NEW> d -r line; do echo "$(date) $line"; done > $(date).redshift_lock_unlock_dbusers.disable.logs                                                                                           <
++ export SERVER_NAME=rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com
++ SERVER_NAME=rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com
++ export SERVER_PORT=5453
++ SERVER_PORT=5453
++ export DB_NAME=cvrsamt
++ DB_NAME=cvrsamt
++ export USER_NAME=csingh1
++ USER_NAME=csingh1
++ export PASS_WORD=CSingh_u4t
++ PASS_WORD=CSingh_u4t
+++ which psql
++ export PSQL=/usr/bin/psql
++ PSQL=/usr/bin/psql
+++ which awk
++ export AWK=/bin/awk
++ AWK=/bin/awk
++ export PGPASSWORD=CSingh_u4t
++ PGPASSWORD=CSingh_u4t
+++ which cat
++ export CAT=/bin/cat
++ CAT=/bin/cat
+++ which mail
++ export MAILER=/bin/mail
++ MAILER=/bin/mail
+++ which tail
++ export TAIL=/usr/bin/tail
++ TAIL=/usr/bin/tail
+++ which grep
++ export GREP=/bin/grep
++ GREP=/bin/grep
++ export RUN_OPTION=disable
++ RUN_OPTION=disable
+++ which cut
++ export CUT=/bin/cut
++ CUT=/bin/cut
++ export CLUSTER_ID=rsamt1
++ CLUSTER_ID=rsamt1
++ export CLUSTER_NAME=rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com
++ CLUSTER_NAME=rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com
+++ which sed
++ export SED=/bin/sed
++ SED=/bin/sed
+++ which tr
++ export TR=/usr/bin/tr
++ TR=/usr/bin/tr
+++ date +%Y.%m.%d-%H.%M.%S
++ export TODAY=2016.05.23-05.00.17
++ TODAY=2016.05.23-05.00.17
+++ which mkdir
++ export MKDIR=/bin/mkdir
++ MKDIR=/bin/mkdir
+++ which chmod
++ export CHMOD=/bin/chmod
++ CHMOD=/bin/chmod
+++ which ln
++ export LN=/bin/ln
++ LN=/bin/ln
++ '[' '!' -d /home/csingh1/EDMIK-285-NEW/DISABLE_LOGS ']'
++ '[' '!' -d PWD/ENABLE_LOGS ']'
+++ /bin/mkdir -p /home/csingh1/EDMIK-285-NEW/ENABLE_LOGS
++ CREATE_LOGS_DIR=
+++ /bin/chmod -R 755 /home/csingh1/EDMIK-285-NEW/DISABLE_LOGS
++ DIR_PERM=
++ '[' 6 -lt 6 ']'
++ case "$1" in
++ export FILEPATH=/home/csingh1/EDMIK-285-NEW/rsamt1_disable_exclude_users_list.prm
++ FILEPATH=/home/csingh1/EDMIK-285-NEW/rsamt1_disable_exclude_users_list.prm
++ export SQL_FILE=/home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_alter_disable_users_list_2016.05.23-05.00.17.sql
++ SQL_FILE=/home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_alter_disable_users_list_2016.05.23-05.00.17.sql
++ export LOG_FILE=/home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_alter_disable_sql_run_2016.05.23-05.00.17.out
++ LOG_FILE=/home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_alter_disable_sql_run_2016.05.23-05.00.17.out
++ export ERR_FILE=/home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_alter_disable_sql_run_2016.05.23-05.00.17.err
++ ERR_FILE=/home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_alter_disable_sql_run_2016.05.23-05.00.17.err
++ export OUTFILE=/home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_disable_users_list_2016.05.23-05.00.17.out
++ OUTFILE=/home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_disable_users_list_2016.05.23-05.00.17.out
++ export EXCLUDE_FILE=/home/csingh1/EDMIK-285-NEW/rsamt1_disable_exclude_users_list.prm
++ EXCLUDE_FILE=/home/csingh1/EDMIK-285-NEW/rsamt1_disable_exclude_users_list.prm
++ export TEMP_FILE=/home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_disable_exclude_users_list_2016.05.23-05.00.17.tmp
++ TEMP_FILE=/home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_disable_exclude_users_list_2016.05.23-05.00.17.tmp
++ touch /home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_disable_exclude_users_list_2016.05.23-05.00.17.tmp
++ export disable=yes
++ disable=yes
++ '[' -e /home/csingh1/EDMIK-285-NEW/rsamt1_disable_exclude_users_list.prm ']'
+++ /bin/sed 's/\(.*\)/'\''\1'\''/' /home/csingh1/EDMIK-285-NEW/rsamt1_disable_exclude_users_list.prm
+++ /usr/bin/tr -s '\n' ,
+++ /bin/sed 's/,$//'
++ export 'EXCLUDE_USER='\''csingh1'\'','\''rdsdb'\'','\''amadmin'\'','\''amhmgr'\'','\''amhusr'\'','\''amrmgr'\'','\''amrusr'\'','\''amstbusr'\'','\''anmmgr'\'','\''arimamgr'\'','\''bisdqusr'\'','\''cmsrptusr'\'','\''cnryusr'\'','\''cvadmin'\'','\''cvamjobusr'\'','\''cvbmgr'\'','\''cvbmstrusr'\'','\''cvbusr'\'','\''cvtabusr'\'','\''datacoetlmgr'\'','\''datacorptusr'\'','\''edmopmgr'\'','\''edmopusr'\'','\''nsahay'\'','\''oaimgr'\'','\''oaiusr'\'','\''rsadmin'\'','\''workmgr'\'','\''workmsmgr'\'''
++ EXCLUDE_USER=''\''csingh1'\'','\''rdsdb'\'','\''amadmin'\'','\''amhmgr'\'','\''amhusr'\'','\''amrmgr'\'','\''amrusr'\'','\''amstbusr'\'','\''anmmgr'\'','\''arimamgr'\'','\''bisdqusr'\'','\''cmsrptusr'\'','\''cnryusr'\'','\''cvadmin'\'','\''cvamjobusr'\'','\''cvbmgr'\'','\''cvbmstrusr'\'','\''cvbusr'\'','\''cvtabusr'\'','\''datacoetlmgr'\'','\''datacorptusr'\'','\''edmopmgr'\'','\''edmopusr'\'','\''nsahay'\'','\''oaimgr'\'','\''oaiusr'\'','\''rsadmin'\'','\''workmgr'\'','\''workmsmgr'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -F '     ' --no-align -t -c 'SELECT usename FROM pg_catalog.pg_user WHERE (valuntil >= abstime(current_timestamp) ) AND usename not in ('\''csingh1'\'','\''rdsdb'\'','\''amadmin'\'','\''amhmgr'\'','\''amhusr'\'','\''amrmgr'\'','\''amrusr'\'','\''amstbusr'\'','\''anmmgr'\'','\''arimamgr'\'','\''bisdqusr'\'','\''cmsrptusr'\'','\''cnryusr'\'','\''cvadmin'\'','\''cvamjobusr'\'','\''cvbmgr'\'','\''cvbmstrusr'\'','\''cvbusr'\'','\''cvtabusr'\'','\''datacoetlmgr'\'','\''datacorptusr'\'','\''edmopmgr'\'','\''edmopusr'\'','\''nsahay'\'','\''oaimgr'\'','\''oaiusr'\'','\''rsadmin'\'','\''workmgr'\'','\''workmsmgr'\'')'
++ SQL_BACKUP=
+++ /bin/sed -n '1!p' /home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_disable_users_list_2016.05.23-05.00.17.out
+++ /bin/cut '-d ' -f1
++ SED_FILE=
+++ /bin/sed -i 's/^/ALTER USER /g' /home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_alter_disable_users_list_2016.05.23-05.00.17.sql
++ SED_FILE2=
++ echo ''
++ echo ''
+++ /bin/sed -e 's/$/ VALID UNTIL \'\''1901-12-14 00:00\'\''/' /home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_alter_disable_users_list_2016.05.23-05.00.17.sql
++ SED_FILE3=
++ IFS=
++ read -r line
++ echo 'ALTER USER amckenz5 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER amckenz5 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER amckenz5 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER amckenz5 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER anisbett VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER anisbett VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER anisbett VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER anisbett VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER apalavil VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER apalavil VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER apalavil VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER apalavil VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER ashaik VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER ashaik VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER ashaik VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER ashaik VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER awadhwan VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER awadhwan VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER awadhwan VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER awadhwan VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER blin VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER blin VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER blin VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER blin VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER ckulkarn VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER ckulkarn VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER ckulkarn VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER ckulkarn VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER ctheodor VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER ctheodor VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER ctheodor VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER ctheodor VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER dnema VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER dnema VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER dnema VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER dnema VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER dsrivast VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER dsrivast VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER dsrivast VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER dsrivast VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER dthoma20 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER dthoma20 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER dthoma20 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER dthoma20 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER eeng VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER eeng VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER eeng VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER eeng VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER eugenia VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER eugenia VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER eugenia VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER eugenia VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER gprakash VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER gprakash VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER gprakash VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER gprakash VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER hjaswal VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER hjaswal VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER hjaswal VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER hjaswal VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER hsingh5 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER hsingh5 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER hsingh5 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER hsingh5 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER iniyazov VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER iniyazov VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER iniyazov VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER iniyazov VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER jalberda VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER jalberda VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER jalberda VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER jalberda VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER jglushak VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER jglushak VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER jglushak VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER jglushak VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER jkelly6 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER jkelly6 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER jkelly6 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER jkelly6 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER jkrishna VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER jkrishna VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER jkrishna VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER jkrishna VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER jrailton VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER jrailton VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER jrailton VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER jrailton VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER kbhavire VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER kbhavire VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER kbhavire VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER kbhavire VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER kbudidha VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER kbudidha VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER kbudidha VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER kbudidha VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER kgallani VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER kgallani VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER kgallani VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER kgallani VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER kjain VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER kjain VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER kjain VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER kjain VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER ktseng VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER ktseng VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER ktseng VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER ktseng VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER lchitraj VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER lchitraj VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER lchitraj VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER lchitraj VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER mdasari VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER mdasari VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER mdasari VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER mdasari VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER mhossein VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER mhossein VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER mhossein VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER mhossein VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER mmebes VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER mmebes VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER mmebes VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER mmebes VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER mpattnay VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER mpattnay VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER mpattnay VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER mpattnay VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER mpothina VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER mpothina VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER mpothina VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER mpothina VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER mronga VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER mronga VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER mronga VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER mronga VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER nali2 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER nali2 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER nali2 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER nali2 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER nkarunan VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER nkarunan VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER nkarunan VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER nkarunan VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER nnejatib VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER nnejatib VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER nnejatib VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER nnejatib VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER pronga VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER pronga VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER pronga VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER pronga VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER psailer VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER psailer VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER psailer VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER psailer VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER rbalan VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER rbalan VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER rbalan VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER rbalan VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER rfranz VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER rfranz VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER rfranz VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER rfranz VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER rkirschn VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER rkirschn VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER rkirschn VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER rkirschn VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER ruy VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER ruy VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER ruy VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER ruy VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER sadhikes VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER sadhikes VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER sadhikes VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER sadhikes VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER sguduru VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER sguduru VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER sguduru VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER sguduru VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER smandal1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER smandal1 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER smandal1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER smandal1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER spssmodel VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER spssmodel VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER spssmodel VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER spssmodel VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER sseymour VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER sseymour VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER sseymour VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER sseymour VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER sstanzia VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER sstanzia VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER sstanzia VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER sstanzia VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER syanamad VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER syanamad VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER syanamad VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER syanamad VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER tbrostek VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER tbrostek VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER tbrostek VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER tbrostek VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER vayinapu VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER vayinapu VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER vayinapu VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER vayinapu VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER vbommare VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER vbommare VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER vbommare VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER vbommare VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER vguntupa VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER vguntupa VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER vguntupa VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER vguntupa VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER vpesara1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER vpesara1 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER vpesara1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER vpesara1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER vrengana VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER vrengana VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER vrengana VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER vrengana VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER wsabra VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER wsabra VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER wsabra VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER wsabra VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER yyang1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER yyang1 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER yyang1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER yyang1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER zgao VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER zgao VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER zgao VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER zgao VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER cliang1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER cliang1 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER cliang1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER cliang1 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER rdalai VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER rdalai VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER rdalai VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER rdalai VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER apushp VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER apushp VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER apushp VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER apushp VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER pbastawa VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER pbastawa VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER pbastawa VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER pbastawa VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER psvenson VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER psvenson VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER psvenson VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER psvenson VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER cwalsh3 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER cwalsh3 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER cwalsh3 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER cwalsh3 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER ckalva VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER ckalva VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER ckalva VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER ckalva VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER pshah2 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER pshah2 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER pshah2 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER pshah2 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER rkrimper VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER rkrimper VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER rkrimper VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER rkrimper VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER aheo VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER aheo VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER aheo VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER aheo VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER vkolla VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER vkolla VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER vkolla VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER vkolla VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER jglushka VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER jglushka VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER jglushka VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER jglushka VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER amohamme VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER amohamme VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER amohamme VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER amohamme VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER pkushwah VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER pkushwah VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER pkushwah VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER pkushwah VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER dclark12 VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER dclark12 VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER dclark12 VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER dclark12 VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER schokkal VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER schokkal VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER schokkal VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER schokkal VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER vyarlaga VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER vyarlaga VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER vyarlaga VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER vyarlaga VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER msow VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER msow VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER msow VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER msow VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER dpillai VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER dpillai VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER dpillai VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER dpillai VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER pyjdbc VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER pyjdbc VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER pyjdbc VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER pyjdbc VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
++ echo 'ALTER USER ksimhadr VALID UNTIL '\''1901-12-14 00:00'\'''
++ echo 'The following command will run on server'
++ echo '/usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c ALTER' USER ksimhadr VALID UNTIL ''\''1901-12-14' '00:00'\'''
+++ /usr/bin/psql -h rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com -p 5453 -U csingh1 -d cvrsamt -t -c 'ALTER USER ksimhadr VALID UNTIL '\''1901-12-14 00:00'\'''
++ DISABLE_USERS='ALTER USER'
++ echo ALTER USER
++ echo ALTER USER
++ echo 'ALTER USER ksimhadr VALID UNTIL '\''1901-12-14 00:00'\'''
++ IFS=
++ read -r line
+++ /bin/ln -sfn /home/csingh1/EDMIK-285-NEW/DISABLE_LOGS/rsamt1_alter_disable_users_list_2016.05.23-05.00.17.sql /home/csingh1/EDMIK-285-NEW/rsamt1.Enable_latest_disabled_users.sql
++ UPDATE_ENABLE_LINK=
++ echo 'link Created ..'
++ echo ''
+

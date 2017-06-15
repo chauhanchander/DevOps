@@ -1,0 +1,25 @@
+---
+
+- name: Pull down the Eracent binary 
+  get_url:
+    url=http://172.16.14.187/data/media/software/eracent9.7.0.3.6/LINUX.x86_64/ClientsInstaller_1_EPA
+    dest=/var/tmp/
+    owner=root
+    group=root
+    mode=0755
+
+- name: Install Eracent 
+  command: /var/tmp/ClientsInstaller_1_EPA
+
+- name: Start Eracent 
+  service: name=EracentEPAService enabled=yes state=started 
+
+
+
+
+
+
+
+
+
+

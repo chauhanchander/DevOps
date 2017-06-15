@@ -1,0 +1,229 @@
+- name: create postgres internal yum repo config
+  copy:
+    src=postgres.repo
+    dest=/etc/yum.repos.d/postgres.repo
+    owner=root
+    group=root
+    mode=644
+
+- name: ensure postgres server and contrib pkgs are installed
+  yum:
+    name=postgresql94-server-{{ pg_rpm_version }},postgresql94-contrib-{{ pg_rpm_version }}
+    enablerepo=postgres
+    state=present
+
+- name: Set PGDATA in /etc/sysconfig/pgsql/postgresql-9.4
+  lineinfile:
+    create=yes
+    dest=/etc/sysconfig/pgsql/postgresql-9.4
+    state=present
+    line=PGDATA={{ pgdata }}
+
+- name: postgres initdb to create new postgresql db cluster
+  command: /sbin/service postgresql-9.4 initdb
+    creates={{ pgdata }}/postgresql.conf
+
+- name: Set wal_level if enable_archivelog is True
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^wal_level[ ]*="
+    insertafter="^#wal_level "
+    line="wal_level = archive"
+  when: enable_archivelog
+
+- name: Set archive_mode if enable_archivelog is True
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^archive_mode[ ]*="
+    insertafter="^#archive_mode "
+    line="archive_mode = on"
+  when: enable_archivelog
+
+- name: Set archive_command if enable_archivelog is True
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^archive_command[ ]*="
+    insertafter="^#archive_command "
+    line="archive_command = 'cp -i %p {{ archivelog_dir }}/%f'"
+  when: enable_archivelog
+
+- name: Set max_wal_senders if enable_archivelog is True
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^max_wal_senders[ ]*="
+    insertafter="^#max_wal_senders "
+    line="max_wal_senders = {{ max_wal_senders }}"
+  when: enable_archivelog
+
+- name: Set wal_keep_segments if enable_archivelog is True
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^wal_keep_segments[ ]*="
+    insertafter="^#wal_keep_segments "
+    line="wal_keep_segments = {{ wal_keep_segments }}"
+  when: enable_archivelog
+
+- name: Set log_directory location
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^log_directory[ ]*="
+    line="log_directory = '{{ log_directory }}'"
+
+- name: Set log_rotation_age
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^log_rotation_age[ ]*="
+    line="log_rotation_age = {{ log_rotation_age }}"
+
+- name: Set log_rotation_size
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^log_rotation_size[ ]*="
+    line="log_rotation_size = {{ log_rotation_size }}"
+
+- name: Set log_connections
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^log_connections[ ]*="
+    insertafter="^#log_connections "
+    line="log_connections = {{ log_connections }}"
+
+- name: Set log_disconnections
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^log_disconnections[ ]*="
+    insertafter="^#log_disconnections "
+    line="log_disconnections = {{ log_disconnections }}"
+
+- name: Set log_statement
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^log_statement[ ]*="
+    insertafter="^#log_statement "
+    line="log_statement = '{{ log_statement }}'"
+
+- name: Configure Postgres to listen on all addresses
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^listen_addresses[ ]*="
+    insertafter="^#listen_addresses "
+    line="listen_addresses = '*'"
+
+- name: Enable in pg_hba.conf the postgres account to connect from anyhost via md5 auth
+  lineinfile:
+    dest={{ pgdata }}/pg_hba.conf
+    line="host    all             postgres        0.0.0.0/0               md5"
+
+- name: Grant postgres account access to use cron
+  lineinfile:
+    dest=/etc/cron.allow
+    line="postgres"
+    create=yes
+    mode=644
+    owner=root
+    group=root
+
+- name: Grant root account access to use cron
+  lineinfile:
+    dest=/etc/cron.allow
+    line="root"
+    create=yes
+    mode=644
+    owner=root
+    group=root
+
+- name: Start postgres and enable at boot
+  service:
+    name=postgresql-9.4
+    enabled=yes
+    state=started
+
+- name: Create custom postgres user profile
+  template:
+    src=pgsql_profile.template
+    dest={{ postgres_user_home }}/.pgsql_profile
+    owner={{ postgres_user_name  }}
+    group={{ postgres_group_name }}
+    mode=600
+
+- name: Install python-psycopg2 package. Used by ansible to connect to Postgres DB
+  yum:
+    name=python-psycopg2
+    state=present
+
+- name: Create DB user for application
+  become: yes
+  become_user: postgres
+  postgresql_user:
+    name={{ db_owner_username }}
+    encrypted=True
+    password={{ db_owner_passwdcrypt }}
+
+- name: Grant DB user login access in pg_hba.conf
+  notify: reload postgres
+  lineinfile:
+    dest={{ pgdata }}/pg_hba.conf
+    line="host      {{ db_name }}       {{ db_owner_username }}        0.0.0.0/0               md5"
+
+- name: Create dir for app tablespace
+  file:
+    path={{ pgdata }}/{{ tablespace_name }}
+    state=directory
+    owner={{ postgres_user_name }}
+    group={{ postgres_group_name }}
+    mode=700
+
+- name: Create app tablespace
+  become: yes
+  become_user: postgres
+  command: /usr/bin/psql -c "create tablespace {{ tablespace_name }}  owner {{ db_owner_username }} location '{{ pgdata }}/{{ tablespace_name }}'"
+  register: create_app_tablespace_result
+  failed_when: create_app_tablespace_result.rc != 0 and ("already exists" not in create_app_tablespace_result.stderr)
+  changed_when: "create_app_tablespace_result.rc == 0" 
+
+- name: Change default tablespace of DB user to new tablespace
+  become: yes
+  become_user: postgres
+  command: /usr/bin/psql -c "alter role {{ db_owner_username }} set default_tablespace={{ tablespace_name }}"
+
+- name: Create temp tablespace
+  become: yes
+  become_user: postgres
+  command: /usr/bin/psql -c "create tablespace temp owner {{ db_owner_username }} location '{{ temp_tablespace_dir }}'"
+  register: create_temp_tablespace_result
+  failed_when: create_temp_tablespace_result.rc != 0 and ("already exists" not in create_temp_tablespace_result.stderr)
+  changed_when: "create_temp_tablespace_result.rc == 0"
+
+- name: Update postgresql.conf with temp_tablespace
+  notify: reload postgres
+  lineinfile:
+    dest={{ pgdata }}/postgresql.conf
+    regexp="^temp_tablespaces[ ]*="
+    insertafter="^#temp_tablespaces "
+    line="temp_tablespaces = 'temp'"
+
+- name: Create app database
+  become: yes
+  become_user: postgres
+  postgresql_db:
+    name={{ db_name }}
+    owner={{ db_owner_username }}
+    encoding={{ db_encoding }}
+
+- name: Create app schema
+  become: yes
+  become_user: postgres
+  command: /usr/bin/psql -c "create schema if not exists authorization {{ db_owner_username }}" -d {{ db_name }}
+
+- name: Revoke create on public schema
+  become: yes
+  become_user: postgres
+  command: /usr/bin/psql -c "revoke create on schema public from public" -d {{ db_name }}
+
+- name: Place the DBA scripts in pgbase local
+  unarchive:
+    src=dba_scripts.tar
+    dest={{ postgres_user_home }}
+    creates={ postgres_user_home }}/local
+    owner=postgres
+    group=dba

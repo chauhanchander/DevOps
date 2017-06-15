@@ -1,0 +1,8 @@
+. ./AppEnv.sh
+alias apps="cd $CLUSTER_HOME/applications"
+alias logs="cd $CLUSTER_HOME/logs"
+alias log1="tail -f $CLUSTER_HOME/logs/server.log"
+alias log2="tail -f $CLUSTER_HOME/logs/server.log"
+alias procs="ps -fu $LOGNAME"
+alias prop="cd /appshr/jboss6/jboss-eap-6.4/modules/com/cablevision/{{app_name}}/main"
+

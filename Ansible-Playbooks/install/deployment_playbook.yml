@@ -1,0 +1,36 @@
+---
+- hosts: appservers
+  user: bamboo_deploy
+  become: True
+  become_user: root
+  tasks:
+    - name: ensure my yum repo is setup on this machine
+      yum_repository:
+        name: eit-devops
+        description: EIT DevOps Internal Repo
+        baseurl: https://artifactory.cablevision.com/artifactory/eit-devops/
+        gpgcheck: no
+        enabled: no
+        metadata_expire: 1
+        state: present
+      become_method: sudo
+
+    - name: If rollback is true, remove any previous versions of RPM
+      yum: name=ansible_playbooks state=absent
+      when: rollback == "true"
+
+    - name: If rollback is true, ensure specific version of ansible_playbooks is installed
+      yum: 
+        name: ansible_playbooks-{{ rpm_version }}-{{ build_number }}
+        state: installed
+        enablerepo: eit-devops
+        update_cache: yes
+      when: rollback == "true"
+
+    - name: If rollback is NOT true, ensure latest version of ansible_playbooks is installed
+      yum: 
+        name: ansible_playbooks-{{ rpm_version }}-{{ build_number }}
+        state: installed
+        enablerepo: eit-devops 
+        update_cache: yes
+      when: rollback == "false"

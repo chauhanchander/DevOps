@@ -1,0 +1,33 @@
+---
+- name: Create VIP on bigIP F5 Load Balancer
+  sudo: false
+  shell: >
+    ENV='{{ f5_environment }}' /home/ansible/ansible-dependencies/f5_bigip/create_f5_bigIP_vip.py
+    --common-name='{{common_name}}' 
+    --members-of-vip='{{s1_ip}}':'{{jboss_http_port}}'
+    --members-of-vip='{{s2_ip}}':'{{jboss_http_port}}'
+    --vip-ip='{{common_name_ip}}' 
+    --healthcheck-url='{{healthcheck_url}}'
+    --healthcheck-string='{{healthcheck_string}}' 
+    {% if healthcheck_interval %} --healthcheck-interval='{{healthcheck_interval}}' {% endif %}
+    {% if healthcheck_timeout %} --healthcheck-timeout='{{healthcheck_timeout}}' {% endif %}
+    {% if healthcheck_username %} --healthcheck-username='{{healthcheck_username}}' {% endif %}
+    {% if healthcheck_password %} --healthcheck-password='{{healthcheck_password}}' {% endif %}
+    {% if healthcheck_protocol %} --healthcheck-protocol='{{healthcheck_protocol}}' {% endif %}
+    {% if http_vip_port %} --vip-port='{{http_vip_port}}' {% endif %}
+    {% if ssl == true %} 
+    --ssl
+    {% if https_vip_port %} --ssl-vip-port='{{https_vip_port}}' {% endif %}
+    {% if enforce_https ==true %} --enforce-https {% endif %}
+    --ssl-key-file='{{key_file}}' 
+    --ssl-cert-file='{{cert_file}}' 
+    {% if ssl_intermediate %} --ssl-intermediate='{{ssl_intermediate}}' {% endif %}
+    {% endif %} 
+    {% if persistence == true %}
+    --persistence-type='{{persistence_type}}'
+    --persistence-expiration-seconds='{{persistence_expiration}}'
+    {% endif %}
+    {% if x_forwarded_for == true %} --x-forwarded-for {% endif %}
+    {% if snat == true %} --snat {% endif %}
+    {% if sync_ha_standby == true %} --sync-ha {% endif %}
+    -v

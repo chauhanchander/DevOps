@@ -1,0 +1,33 @@
+# Create a new VM on an ESX server
+---
+- name: create_vm
+  vsphere_guest:
+    vcenter_hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    guest: '{{ vm_name }}'
+    from_template: yes
+    template_src: '{{ vcenter_template }}'
+    cluster: '{{ vcenter_cluster }}'
+    resource_pool: '{{ vcenter_resource_pool }}'
+    validate_certs: False
+- name: resize_vm
+  vsphere_guest:
+    vcenter_hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    guest: '{{ vm_name }}'
+    state: reconfigured
+    vm_extra_config:
+      vcpu.hotadd: yes
+      mem.hotadd: yes
+    vm_hardware:
+      memory_mb: '{{vm_memsize}}'
+      num_cpus: '{{vm_numcpus}}'
+    validate_certs: False
+- name: add nic
+  sudo: false
+  shell: ENV='{{ vsphere_environment }}' /home/ansible/ansible-dependencies/vsphere_guest_add_nic/vsphere_guest_add_nic.py --vm-name='{{ vm_name }}' --network='{{ vm_network  }}' -v
+- name: set_ip_addr
+  sudo: false
+  shell: ENV='{{ vsphere_environment }}' /home/ansible/ansible-dependencies/vsphere_linux_guest_config_nic/set_ip_on_guest.py -n '{{ vm_name }}' -i '{{ ip_addr }}' -m '{{ ip_mask }}' -g '{{ ip_gateway }}' -f '{{ fqdn }}'

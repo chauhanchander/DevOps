@@ -1,0 +1,31 @@
+echo
+echo "********************************************"
+echo "Stop DB: sudo /etc/init.d/postgresql-9.4 stop"
+echo "Start DB: sudo /etc/init.d/postgresql-9.4 start"
+echo "Status DB: sudo /etc/init.d/postgresql-9.4 status"
+echo "Dump DB: {{postgres_user_home}}/local/bin/DBDump postgres {{db_name}}"
+echo "Recover from Tape: recover -s cvspbak2 -c `hostname -s`"
+echo "********************************************"
+
+export PGROOT={{postgres_user_home}}
+export PGBASE={{postgres_user_home}}
+export PGHOME={{postgres_user_home}}
+export PGDATA={{pgdata}}
+export PGPORT=5432
+export PGHOST={{server1_hostname}}
+export PGUSER=postgres
+export PGPASSFILE=$PGBASE/.pgpass
+export PGDATABASE=postgres
+export PGBKP=$PGBASE/9.4/backups
+export PG_LOG=$PGBASE/9.4/log
+export PG_XLOG=$PGDATA/pg_xlog
+export PG_CLOG=$PGDATA/pg_clog
+export PATH=$PATH:$PGHOME/local/bin
+
+# Set up utility environments
+export UTL_HOME=$PGBASE/local
+export _logs=${UTL_HOME}/log
+export _bins=${UTL_HOME}/bin
+export _sqls=${UTL_HOME}/sql
+export _sidpageuser=${HOME}/.PAGEUSER
+export _sidemailuser=${HOME}/.EMAILUSER

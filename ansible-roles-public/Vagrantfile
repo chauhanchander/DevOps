@@ -1,0 +1,16 @@
+#install Ansible and run playbook.yml. The ansible_local provisioner is currently broken.
+$script = <<SCRIPT
+yum -y install PyYAML git python-babel python-setuptools python-jinja2 ksh
+git clone git://github.com/ansible/ansible.git --recursive -b stable-2.1
+source ansible/hacking/env-setup
+echo "[testmachine]" > ansible_test.inventory
+echo "127.0.0.1" >> ansible_test.inventory
+ansible-playbook -vv -i ansible_test.inventory /vagrant/vagrant_playbook.yml
+chown -R vagrant:vagrant /home/vagrant/ansible /home/vagrant/ansible_test.inventory
+SCRIPT
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "puppetlabs/centos-6.6-64-nocm"
+  config.vm.provision "shell", inline: $script
+  #config.vm.network :forwarded_port, guest: 8080, host: 18080
+end

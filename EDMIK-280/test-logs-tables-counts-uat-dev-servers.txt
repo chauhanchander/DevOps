@@ -1,0 +1,27 @@
+csingh1@cvluawsbisam1:/home/csingh1/EDMIK-280> ./redshift_cluster_tables_check.sh 70 90
+
+Cluster name : rsamd1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com Database Name : CSingh_d3v Percentage of Tables : Warling level : 70 Critical Level 90: Cluster typei: DEVLOPMENT
+The First limit is 6930
+The Critical limit is 8910
+The Total tables are 3163
+ The Table condition is All Ok
+Cluster name : tappdev.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com Database Name : CSingh_d3v Percentage of Tables : Warling level : 70 Critical Level 90: Cluster typei: DEVLOPMENT
+The First limit is 6930
+The Critical limit is 8910
+The Total tables are 489
+ The Table condition is All Ok
+Cluster name : rsbisd1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com Database Name : CSingh_d3v Percentage of Tables : Warling level : 70 Critical Level 90: Cluster typei: DEVLOPMENT
+The First limit is 6930
+The Critical limit is 8910
+The Total tables are 2238
+ The Table condition is All Ok
+Cluster name : rsamt1.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com Database Name : CSingh_u4t Percentage of Tables : Warling level : 70 Critical Level 90: Cluster typei: UAT
+The First limit is 6930
+The Critical limit is 8910
+The Total tables are 3215
+ The Table condition is All Ok
+Cluster name : tapp2uat.czfsgsdwh1wy.us-east-1.redshift.amazonaws.com Database Name : CSingh_u4t Percentage of Tables : Warling level : 70 Critical Level 90: Cluster typei: UAT
+The First limit is 6930
+The Critical limit is 8910
+The Total tables are 1008
+ The Table condition is All Ok

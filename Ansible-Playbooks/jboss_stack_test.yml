@@ -1,0 +1,60 @@
+---
+
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: True
+  ignore_errors: yes
+  vars:
+    min_vm_memsize: vm_memsize - 10%
+    max_vm_memsize: vm_memsize + 10%
+
+  tasks:
+
+    - action: debug msg="cpu = {{ ansible_processor_count }} "
+    - action: debug msg="vm_memsize= {{ ansible_memtotal_mb }}"
+
+    - name: "Checking that number of cpu's are created according to requirement"    
+      assert:
+        that:
+          - "vm_numcpus == {{ ansible_processor_count }} "
+      ignore_errors: yes
+
+    - name: "Checking Physical_memory"
+      assert:
+        that: "{{ ansible_memtotal_mb }} == vm_memsize or {{ ansible_memtotal_mb }} > min_vm_memsize  or {{ ansible_memtotal_mb }} < max_vm_memsize "
+
+      ignore_errors: yes
+  
+    - name: set protocol and port when ssl = true
+      set_fact: protocol='https' port="{{ https_port }}"
+      when: ssl
+    
+    - name: set protocol and port when ssl = false
+      set_fact: protocol='http' port="{{ http_port }}"
+      when: not ssl
+
+    - name: Ping the load balancer
+      action: uri url={{ protocol }}://{{ common_name }}:{{ port }}{{ healthchek_url }} return_content=yes validate_certs=False
+      register: webpage
+  
+    - name: check for string
+      when: "'{{ healthcheck_string }}' not in webpage.content"
+      action: fail
+    
+    - name: Test server1 url
+      action: uri url=http://{{ server1_hostname }}:{{ jboss_http_port }}{{ healthchek_url }} return_content=yes
+      register: webpage
+
+    - name: Check for string on server2
+      when: "'{{ healthcheck_string }}' not in webpage.content"    
+      action: fail
+
+    - name: Test server2 url
+      action: uri url=http://{{ server2_hostname }}:{{ jboss_http_port }}{{ healthchek_url }} return_content=yes
+      register: webpage
+
+    - name: Check for string on server2
+      when: "'{{ healthcheck_string }}' not in webpage.content"
+      action: fail
+
+

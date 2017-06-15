@@ -1,0 +1,4 @@
+---
+elkEnv: dev
+elkHostsAndPorts: ["cvldelk01.cscdev.com:5044"]
+files: ["/var/log/secure", "/var/log/messages"]

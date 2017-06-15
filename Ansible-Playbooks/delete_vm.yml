@@ -1,0 +1,28 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  vars_files:
+    - delete_vm_vault.yml
+  pre_tasks:
+    - name: get server ip
+      sudo: false
+      command: dig +short  '{{ vm_name }}'
+      register: server_ip
+  tasks:
+    - name: delete_vm
+      sudo: false
+      vsphere_guest:
+        vcenter_hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter[vsphere_environment].username }}'
+        password: '{{ vcenter[vsphere_environment].password }}'
+        guest: '{{ vm_name }}'
+        state: absent
+        validate_certs: False
+      tags:
+        - delete_vm
+    - name: delete dns entry
+      sudo: false
+      shell: ENV={{ dns_environment }} /home/ansible/ansible-dependencies/dns_rest_client_py/dns_entry.py -n '{{ vm_dns_short_hostname }}' -d '{{ vm_dns_domainname }}' -a '{{ server_ip.stdout }}' -e
+      tags:
+        - delete_dns

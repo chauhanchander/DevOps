@@ -1,0 +1,15 @@
+---
+- name: Add YUM repo for Eitsysadmin
+  yum_repository:
+    name: eitsysadmin
+    description: Eitsysadmin Repository
+    baseurl: https://bamboo.cablevision.com/eitsysadmin
+    gpgcheck: no
+    enabled: no
+ 
+- name: Install Networker agent
+  yum: name=lgtoclnt state=present enablerepo=eitsysadmin
+
+- name: Start and enable Legato Networker
+  service: name=networker enabled=yes state=started   
+   

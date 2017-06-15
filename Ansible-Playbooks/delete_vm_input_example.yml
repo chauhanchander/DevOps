@@ -1,0 +1,13 @@
+#DEV vSphere
+vcenter_hostname: cscdbpvc1.ndcvc.com
+
+#PROD vSphere
+#vcenter_hostname: cscpbpvc1.cablevision.com
+
+#used for ansible-dependencies. Choose either dev or prod
+dns_environment: dev
+vsphere_environment: dev
+
+vm_name: erictest2.cscdev.com
+vm_dns_short_hostname: erictest2
+vm_dns_domainname: cscdev.com

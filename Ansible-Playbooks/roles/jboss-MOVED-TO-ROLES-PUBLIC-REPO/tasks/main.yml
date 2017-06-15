@@ -1,0 +1,81 @@
+---
+- name: Create jboss group
+  group: name='{{jboss_group_name}}' gid='{{jboss_group_gid}}' state=present
+
+- name: Create jboss user
+  user: name='{{jboss_user_name}}' comment="JBOSS 6 Application ID {{request_number}}" home='{{jboss_user_home}}' group='{{jboss_group_name}}' shell='{{jboss_user_shell}}' uid='{{jboss_user_uid}}' state=present
+
+- name: Fetch Jboss from Repo
+  get_url: url=https://bamboo.cablevision.com/eitcoreservices/jboss_appshr.tar.gz dest='{{appshr_extract_basedir}}'/jboss_appshr.tar.gz owner='{{jboss_user_name}}' group='{{jboss_group_name}}'
+
+- name: Copy the jboss archive and extract it
+  unarchive: copy=no src='{{appshr_extract_basedir}}'/jboss_appshr.tar.gz dest='{{appshr_extract_basedir}}' owner='{{jboss_user_name}}' group='{{jboss_group_name}}' 
+
+- name: Remove the temporary jboss tar gz archive
+  file: path='{{appshr_extract_basedir}}'/jboss_appshr.tar.gz state=absent
+
+- name: Apply AppEnv.sh Template
+  template: src=AppEnv.sh.template dest="{{appshr_extract_basedir}}/jboss6/servers/APPCluster/AppEnv.sh" owner='{{jboss_user_name}}' group='{{jboss_group_name}}'
+
+- name: Apply standalone-ha.xml Template
+  template: src=standalone-ha.xml.template dest="{{appshr_extract_basedir}}/jboss6/servers/APPCluster/configuration/standalone-ha.xml" owner='{{jboss_user_name}}' group='{{jboss_group_name}}'
+
+- name: Apply module.xml Template
+  template: src=module.xml.template dest="{{appshr_extract_basedir}}/jboss6/jboss-eap-6.4/modules/com/cablevision/APP/main/module.xml" owner='{{jboss_user_name}}' group='{{jboss_group_name}}'
+
+- name: Stat APP dir to see if it exists in prep for move
+  stat: path="{{appshr_extract_basedir}}/jboss6/jboss-eap-6.4/modules/com/cablevision/APP"
+  register: APP_stat
+
+- name: Rename APP dir to app_name
+  command: /bin/mv "{{appshr_extract_basedir}}/jboss6/jboss-eap-6.4/modules/com/cablevision/APP" "{{appshr_extract_basedir}}/jboss6/jboss-eap-6.4/modules/com/cablevision/{{app_name}}"
+  when: APP_stat.stat.exists
+
+- name: Stat AppCluster dir to see if it exists in prep for move
+  stat: path='{{appshr_extract_basedir}}'/jboss6/servers/APPCluster
+  register: appcluster_stat
+
+- name: Rename AppCluster dir to app_nameCluster
+  command: /bin/mv "{{appshr_extract_basedir}}/jboss6/servers/APPCluster" "{{appshr_extract_basedir}}/jboss6/servers/{{app_name}}Cluster"
+  when: appcluster_stat.stat.exists
+
+- name: Create app user
+  user: name='{{app_acct_name}}' comment="JBoss 6.4.2 {{app_name}} {{request_number}}" home='{{app_acct_home}}' group='{{jboss_group_name}}' shell='{{app_acct_shell}}' uid='{{app_acct_uid}}' state=present createhome=no
+
+- name: Change ownership of App Modules Dir
+  file: path="{{appshr_extract_basedir}}/jboss6/jboss-eap-6.4/modules/com/cablevision/{{app_name}}" state=directory owner="{{app_acct_name}}" group="{{jboss_group_name}}" mode=0755 recurse=yes
+
+- name: Change ownership of app user homedir
+  file: path='{{app_acct_home}}' owner='{{app_acct_name}}' group='{{jboss_group_name}}' state=directory recurse=yes
+
+- name: Apply app user profile Template
+  template: src=profile.template dest="{{app_acct_home}}/.profile" owner="{{app_acct_name}}" group="{{jboss_group_name}}"
+
+- name: Create jboss6 init script
+  template: src=jboss6.template dest="/etc/init.d/{{app_acct_name}}" owner=root group=root mode=0755
+
+- name: Enable jboss6 start at bootup rc3
+  file: src="/etc/init.d/{{app_acct_name}}" dest="/etc/rc3.d/S99{{app_acct_name}}" owner=root group=root state=link
+
+- name: Enable Crontab for Log JBoss Server Log
+  cron: name="Server Log Archive"  minute=59 hour=23 user='{{app_acct_name}}' job="/appshr/core_ops_scripts/ArchiveJbossLog date {{app_acct_home}}/logs {{app_archivelog_path}} > {{app_acct_home}}/logs/ServerlogArchive_cron.log 2>&1" cron_file='{{app_acct_name}}'
+
+- name: Enable Crontab for Log JBoss Access Log
+  cron: name="Access Server Log Archive"  minute=59 hour=23 user='{{app_acct_name}}' job="/appshr/core_ops_scripts/ArchiveJbossAccessLog {{app_acct_home}}/logs {{app_archivelog_path}} > {{app_acct_home}}/logs/AccesslogArchive_cron.log 2>&1" cron_file='{{app_acct_name}}'
+
+- name: Enable Crontab for Log Error Monitoring
+  cron: name="Log Error Monitoring"  minute="*/10" user='{{app_acct_name}}' job="/appshr/core_ops_scripts/MonitorJB.sh {{app_acct_name}} {{app_acct_home}}/logs/server.log all {{server1_hostname}} {{server2_hostname}} > {{app_acct_home}}/logs/Monitor_cron.log 2>&1" cron_file='{{app_acct_name}}'
+
+- name: Start AppD Machine Agent
+  shell: "su - jboss6 -c /appshr/appdynamics/MachineAgent/startAppDMachineAgent.sh"
+
+- name: Start JBoss
+  shell: "/etc/init.d/{{app_acct_name}} start"
+
+- name: User Creation in JBoss Realm
+  command: "{{appshr_extract_basedir}}/jboss6/jboss-eap-6.4/bin/add-user.sh -u {{jboss_realm_user}} -p {{jboss_realm_password}} -g PowerUser --silent"
+  args:
+    chdir: "{{app_acct_home}}/configuration"
+
+- name: Deploy csping sample WAR
+  shell: "/etc/init.d/{{app_acct_name}} deploy csping.war"

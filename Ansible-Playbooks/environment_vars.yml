@@ -1,0 +1,61 @@
+---
+environments:
+  sandbox:
+    vm_networks:
+      dv-VLAN110:
+        vm_start_ip: 172.16.110.50
+        vm_end_ip: 172.16.110.54
+        ip_mask: 255.255.255.0
+        ip_gateway: 172.16.110.1
+      dv-VLAN111:
+        vm_start_ip: 172.16.111.100
+        vm_end_ip: 172.16.111.109
+        ip_mask: 255.255.255.0
+        ip_gateway: 172.16.111.1
+    vip_start_ip: 172.16.110.47
+    vip_end_ip: 172.16.110.49
+    vcenter_hostname: cscdbpvc1.ndcvc.com
+    vcenter_template: ANSIBLE_RHEL6.7_06-29-2016_1100_DEV_TEMPLATE
+    vcenter_resource_pool: /Resources
+    vcenter_cluster: DevESXcl03
+    vsphere_datastore: Devcl3-Vol10-Ansible-7045-0799
+    dns_environment: dev
+    dns_dig_server: 172.16.8.220
+    f5_environment: lab
+    vsphere_environment: dev
+  dev:
+    vm_networks:
+      dv-VLAN20:
+        vm_start_ip: 172.16.20.128
+        vm_end_ip: 172.16.20.207
+        ip_mask: 255.255.255.0
+        ip_gateway: 172.16.20.1
+    vip_start_ip: 172.16.113.22
+    vip_end_ip: 172.16.113.61
+    vcenter_hostname: cscdbpvc1.ndcvc.com
+    vcenter_template: ANSIBLE_RHEL6.7_05-25-2016_1113_VLAN20_PROD_TEMPLATE
+    vcenter_resource_pool: /Resources
+    vcenter_cluster: DevESXcl03
+    vsphere_datastore: Devcl3-Vol10-Ansible-7045-0799
+    dns_environment: dev
+    dns_dig_server: 172.16.8.220
+    f5_environment: dev
+    vsphere_environment: dev
+  prod:
+    vm_networks:
+      dv_Prod3_VLAN69:
+        vm_start_ip: 10.128.69.120
+        vm_end_ip: 10.128.69.139
+        ip_mask: 255.255.255.0
+        ip_gateway: 10.128.69.1
+    vip_start_ip: 10.190.8.14
+    vip_end_ip: 10.190.8.23
+    vcenter_hostname: cscpbpvc1.cablevision.com
+    vcenter_template: ANSIBLE_RHEL6.7_05-31-2016_1445_VLAN69_PROD_TEMPLATE
+    vcenter_resource_pool: /Resources
+    vcenter_cluster: prodesxcl03
+    vsphere_datastore: Pcl3-Vol38-Ansible-V0910-0907
+    dns_environment: prod
+    dns_dig_server: 10.128.8.21
+    f5_environment: prod
+    vsphere_environment: prod

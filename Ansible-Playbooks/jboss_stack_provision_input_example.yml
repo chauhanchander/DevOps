@@ -1,0 +1,132 @@
+---
+#Target infrastructure environment. sandbox, dev, or prod
+target_environment: sandbox
+
+#Business Information for the CMDB
+cmdb_appname: JIRA
+cmdb_business_owner: gfelice
+cmdb_business_owner_dept: EIT
+cmdb_tech_owner: emcalvin
+cmdb_tech_owner_dept: EIT DevOps
+
+#Notification info
+notify_from: "OST_Core_SA@cablevision.com (EIT Core Services)"
+notify_to: "dnieto@cablevision.com, servicetransition@cablevision.com, OST_Core_SA@cablevision.com, eitplatformops@cablevision.com, NHARJUS@cablevision.com, JDPASCALE@cablevision.com, japgar@cablevision.com, kwasserb@cablevision.com"
+notify_subject: "Newly provisioned assets from Ansible"
+
+#DNS names
+server1_hostname: erictest1.cscdev.com
+server2_hostname: erictest2.cscdev.com
+common_name: erictestapp1.cscdev.com
+
+#JBoss VM options
+vm_memsize: 6144
+vm_numcpus: 1
+disks:
+  appshrvg:
+    vg_name: appshrvg
+    device: /dev/sdb
+    disk_size_gb: 40
+lvols:
+  appshr:
+    lv_name: appshr
+    vg: appshrvg
+    lv_size: 100%FREE
+    fs_type: ext4
+    mount_point: /appshr
+    owner: jboss6
+    group: jboss6
+    mode: 755
+
+
+#Users and groups to create
+user_accounts:
+  hnakka:
+    username: hnakka
+    uid: 470
+    gecos: Hari Nakka - EDM Core Services SA
+    home: /home/hnakka
+    shell: /bin/ksh
+    group: edmcor
+    groups: sshlogin
+    #you can generate an encrypted password using the "grub-crypt --sha-512" command. Below example is set to MyPassw0rd
+    passwordcrypt: $6$XLHp2k2FoM3IMr5i$aKmwS7O7Yxg354Y2w2F9kVE5Jqe/PDN.nDj.DSHUbTd0pHkRt8DGZPl/s7O5drHoHF0.B0ma/zwaNWs/PYl1U1
+  sbolla:
+    username: sbolla
+    uid: 475
+    gecos: Srinivas Bolla - EDM Core Services SA
+    home: /home/sbolla
+    shell: /bin/ksh
+    group: edmcor
+    groups: sshlogin
+    #you can generate an encrypted password using the "grub-crypt --sha-512" command. Below example is set to MyPassw0rd
+    passwordcrypt: $6$XLHp2k2FoM3IMr5i$aKmwS7O7Yxg354Y2w2F9kVE5Jqe/PDN.nDj.DSHUbTd0pHkRt8DGZPl/s7O5drHoHF0.B0ma/zwaNWs/PYl1U1
+
+user_groups:
+  edmcor:
+    #anyone in this group will get sudo access to:
+    #su - jboss_user_name (variable defined below)
+    #sudo su - app_acct_name
+    groupname: edmcor
+    gid: 400
+  appdev:
+    #anyone in this group will get sudo access to (only in non-prod target_environment):
+    #su - app_acct_name (variable defined below)
+    groupname: appdev
+    gid: 33100
+
+
+#JBoss role options
+request_number: REQ123345
+app_name: smart
+app_acct_name: jbsmart
+app_acct_uid: 41521
+app_acct_home: /appshr/jboss6/servers/smartCluster
+app_acct_shell: /bin/ksh
+appshr_extract_basedir: /appshr
+app_archivelog_path: /appshr/jboss6/servers/smartCluster/logs/archive
+jboss_user_name: jboss6
+jboss_user_uid: 33000
+jboss_user_shell: /bin/ksh
+jboss_user_home: /appshr/jboss6
+jboss_group_name: jboss6
+jboss_group_gid: 33000
+jboss_multicast_addr: 224.0.0.1
+jboss_multicast_port: 45000
+jboss_http_port: 8080
+
+#f5 bigIP options
+healthcheck_url: /csping/csping.html
+healthcheck_string: "Content Switch Ping"
+healthcheck_username:
+healthcheck_password: 
+healthcheck_protocol: http
+healthcheck_interval: 5
+healthcheck_timeout: 10
+http_vip_port: 80
+https_vip_port: 443
+persistence: true
+#cookie or source_addr
+persistence_type: cookie
+#if cookie, defined as d:h:m:s, if source_addr then it is defined in just seconds. for session cookie, set it to 0:0:0:0
+persistence_expiration: 0:0:0:0
+x_forwarded_for: true
+snat: true
+sync_ha_standby: true
+
+#SSL options. enforce_https is actually for the f5 VIP creation.
+ssl: false
+enforce_https: true
+key_file: /home/ansible/ssl_files/erictestappfinal3.cscdev.com.key
+csr_file: /home/ansible/ssl_files/erictestappfinal3.cscdev.com.csr
+cert_file: /home/ansible/ssl_files/erictestappfinal3.cscdev.com.crt
+ou: EIT
+challenge_phrase: Cablevisi0n_secure
+#cert_type: Server
+cert_type: IntranetServer
+ssl_intermediate: /Common/Verisign_G4.crt
+server_type: Apache
+validity_period: 1
+first_name: Eric
+last_name: McAlvin
+email: "emcalvin@cablevision.com"

@@ -1,0 +1,218 @@
+---
+
+#STEP 1 - ADD DNS ENTRIES
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  vars_files:
+    - environment_vars.yml
+  roles:
+    - role: dns-record
+      dns_environment: '{{ environments[target_environment].dns_environment }}'
+      start_ip: '{{ environments[target_environment].vm_networks[vm_network].vm_start_ip }}'
+      end_ip: '{{ environments[target_environment].vm_networks[vm_network].vm_end_ip }}'
+      server_name: '{{ server1_hostname }}'
+      tags: [ 'create_dns_vm1' ]
+  tags:
+    - create_dns
+
+#STEP 2 - GET THE IPs FROM THE ABOVE STEP, PUT IN VARS, THEN CREATE VMs
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  vars_files:
+    - environment_vars.yml
+    - iaas_provision_vault.yml
+  pre_tasks:
+    - name: get server1 ip
+      command: dig @{{ environments[target_environment].dns_dig_server }} +short {{ server1_hostname }}
+      register: server1_ip
+      tags: [ 'create_vms', 'create_vm1', 'get_ips_dns' ]
+  roles:
+    - role: vsphere-guest
+      vm_name: '{{ server1_hostname }}'
+      ip_addr: '{{ server1_ip.stdout }}'
+      ip_mask: '{{ environments[target_environment].vm_networks[vm_network].ip_mask }}'
+      ip_gateway: '{{ environments[target_environment].vm_networks[vm_network].ip_gateway }}'
+      vm_network: '{{ vm_network }}'
+      fqdn: '{{ server1_hostname }}'
+      vm_memsize: '{{ vm_memsize }}'
+      vm_numcpus: '{{ vm_numcpus }}'
+      vsphere_environment: '{{ environments[target_environment].vsphere_environment }}'
+      vcenter_username: '{{ vsphere_vault[vsphere_environment].username }}'
+      vcenter_password: '{{ vsphere_vault[vsphere_environment].password }}'
+      vcenter_template: '{{ environments[target_environment].vcenter_template }}'
+      vcenter_resource_pool: '{{ environments[target_environment].vcenter_resource_pool }}'
+      vcenter_cluster: '{{ environments[target_environment].vcenter_cluster }}'
+      vcenter_hostname: '{{ environments[target_environment].vcenter_hostname }}'
+      tags: [ 'create_vms', 'create_vm1' ]
+
+#STEP 3 - WAIT UNTIL THE GUESTS ARE FULLY ONLINE AND SSH IS LISTENING
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: wait for server1
+      wait_for: host='{{ server1_hostname }}' port=22 state=started
+  tags:
+    - wait_for_servers_to_be_up
+
+#STEP 4 - ADD APP DISK
+- hosts: newservers
+  user: ansible
+  sudo: True
+  vars_files:
+    - environment_vars.yml
+  pre_tasks:
+    - name: add_disk
+      connection: local
+      sudo: false
+      shell: > 
+        ENV='{{ environments[target_environment].vsphere_environment }}' 
+        /home/ansible/ansible-dependencies/vsphere_guest_add_disk/vsphere_add_disk_to_guest.py 
+        -n '{{ inventory_hostname }}' 
+        -d '{{ item.value.disk_size_gb }}' 
+        -s '{{ environments[target_environment].vsphere_datastore }}'
+      with_dict: '{{ disks }}'
+      tags: [ 'add_luns' ]
+    - name: create_vg
+      lvg:
+        vg: '{{ item.value.vg_name }}'
+        pvs: '{{ item.value.device }}'
+      with_dict: '{{ disks }}'
+      tags: [ 'create_vgs' ]
+  tasks:
+    - name: create lv in the vg
+      lvol: 
+        vg: '{{ item.value.vg }}'
+        lv: '{{ item.value.lv_name }}'
+        size: '{{ item.value.lv_size }}'
+      with_dict: '{{ lvols }}'
+      tags: [ 'create_lvs' ]
+    - name: create filesystem on the new lv
+      filesystem:
+        fstype: '{{ item.value.fs_type }}'
+        dev: /dev/{{ item.value.vg }}/{{ item.value.lv_name }}
+      with_dict: '{{ lvols }}'
+      tags: [ 'create_filesys' ]
+    - name: mount the new filesystem and add to fstab
+      mount:
+        name: '{{ item.value.mount_point }}'
+        src: /dev/{{ item.value.vg }}/{{ item.value.lv_name }}
+        fstype: '{{ item.value.fs_type }}'
+        state: mounted
+        dump: 1
+        passno: 2
+      with_dict: '{{ lvols }}'
+      tags: [ 'mount_filesys' ]
+  tags:
+    - add_storage
+
+#STEP 5 - Setup user accounts and groups on new VMs
+- hosts: newservers
+  user: ansible
+  sudo: True
+  tasks:
+    - name: Create groups
+      group:
+        name: '{{ item.value.groupname }}'
+        gid: '{{ item.value.gid }}'
+        state: present
+      with_dict: '{{ user_groups }}'
+    - name: Create core services accounts
+      user: 
+        name: '{{ item.value.username }}'
+        comment: '{{ item.value.gecos }}' 
+        home: '{{ item.value.home }}'
+        group: '{{ item.value.group }}' 
+        shell: '{{ item.value.shell }}' 
+        uid: '{{ item.value.uid }}' 
+        groups: '{{ item.value.groups }}' 
+        password: '{{ item.value.passwordcrypt }}' 
+        update_password: on_create 
+        state: present
+      with_dict: '{{ user_accounts }}'
+    - name: Create Service accounts
+      user:
+        name: '{{ item.value.username }}'
+        comment: '{{ item.value.gecos }}'
+        home: '{{ item.value.home }}'
+        group: '{{ item.value.group }}'
+        shell: '{{ item.value.shell }}'
+        uid: '{{ item.value.uid }}'
+        groups: '{{ item.value.groups }}'
+        state: present
+      with_dict: '{{ service_accounts }}'
+    - name: Grant Core Services team (edmcore group) sudo su access to service accounts
+      lineinfile: "dest=/etc/sudoers line='%edmcor ALL=(ALL) NOPASSWD: /bin/su - {{ item.value.username }}' insertafter='^ansible ' state=present"
+      with_dict: '{{ service_accounts }}'
+  tags:
+    - create_users_groups
+
+#STEP 6 - SET FILESYS OWNERSHIP
+- hosts: newservers
+  user: ansible
+  sudo: True
+  tasks:
+    - name: set filesys ownership
+      file:
+        path: '{{ item.value.mount_point }}'
+        state: directory
+        owner: '{{ item.value.owner }}'
+        group: '{{ item.value.group }}'
+        mode: '{{ item.value.mode }}'
+      with_dict: '{{ lvols }}'
+
+#STEP 7 - INSTALL OS LEVEL PKGS
+- hosts: newservers
+  user: ansible
+  sudo: True
+  roles:
+    - eracent-client
+    - legato-networker
+    - opsware-agent
+  tags:
+    - apply_os_roles
+
+#STEP 8 - SEND NOTIFICATIONS TO ALL INTERESTED PARTIES
+- hosts: newservers
+  become: True
+  become_user: root
+  tasks:
+    - name: Send email to Asset Mgmt with new asset info
+      delegate_to: 127.0.0.1
+      run_once: true
+      become: False
+      mail:
+        from: '{{ notify_from }}'
+        to: '{{ notify_to }}'
+        subject: '{{ notify_subject }}'
+        body: |
+          The following new assets (RHEL VMs) were provisioned automatically via Ansible for EIT Core Services.
+
+          ServiceNow REQ: {{ request_number }}
+
+          Hosts:
+
+          {% for host in groups['newservers'] %}
+
+          HOSTNAME: {{ host }}
+          IPADDR: {{ hostvars[host].ansible_default_ipv4.address }}
+          SERIAL_NUMBER: {{ hostvars[host].ansible_product_serial }}
+
+          {% endfor %}
+
+          Application Name: {{ cmdb_appname }}
+          Business Owner: {{ cmdb_business_owner }}
+          Business Owner Dept: {{ cmdb_business_owner_dept }}
+          Tech Owner: {{ cmdb_tech_owner }}
+          Tech Owner Dept: {{ cmdb_tech_owner_dept }}
+
+          The following needs to be done:
+          1.) Asset Mgmt Team needs to update asset data in CMDB to include business info.
+          2.) SysAdmin team needs to be aware of these new servers that were provisioned.
+          3.) Backup team needs to add these new servers to backups.
+          4.) Monitoring team needs to add these new servers to monitoring.
+  tags:
+    - send_notifications
+
