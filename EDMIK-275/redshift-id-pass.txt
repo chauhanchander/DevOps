@@ -1,5 +1,0 @@
-rsamd1:csingh1:CSingh_d3v:cvrsamd:5453:workmsmgr:30
-tappdev:csingh1:CSingh_d3v:tapp2d:5447:workmsmgr:30
-rsbisd1:csingh1:CSingh_d3v:cvrsbisd:5441:workmsmgr:30
-rsamt1:csingh1:CSingh_u4t:cvrsamt:5453:workmsmgr:30
-tapp2uat:csingh1:CSingh_u4t:tapp2t:5441:workmsmgr:30
