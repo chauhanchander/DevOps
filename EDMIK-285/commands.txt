@@ -1,2 +1,0 @@
-bash -x ./redshift_lock_unlock_dbusers.sh enable  rsamt1 5453 cvrsamt csingh1 CSingh_u4t rsamt1.Enable_latest_disabled_users.sql
-bash -x ./redshift_lock_unlock_dbusers.sh disable  rsamt1 5453 cvrsamt csingh1 CSingh_u4t
