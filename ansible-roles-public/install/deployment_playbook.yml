@@ -8,7 +8,7 @@
       yum_repository:
         name: eit-devops
         description: EIT DevOps Internal Repo
-        baseurl: https://artifactory.cablevision.com/artifactory/eit-devops/
+        baseurl: https://artifactory.company.com/artifactory/eit-devops/
         gpgcheck: no
         enabled: no
         metadata_expire: 1
