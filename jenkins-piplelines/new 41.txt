@@ -1,0 +1,47 @@
+node {
+    withCredentials([usernameColonPassword(credentialsId: '86312bd0-85db-4cf0-ba44-73891c19f350', variable: 'USERPASS')]) {
+        // Mark the code checkout 'stage'....
+        // Get some code from a GitHub repository
+
+        stage 'Build React Webapp (branch:ayurveda-prod)'
+        
+        checkout scm: [$class: 'GitSCM', branches: [[name: 'ayurveda-prod']],
+        extensions: [[$class: 'CleanBeforeCheckout'], [$class: 'RelativeTargetDirectory', relativeTargetDir: 'react-webapp']],
+        userRemoteConfigs: [[credentialsId: '86312bd0-85db-4cf0-ba44-73891c19f350', url: 'https://github.com/ayurveda/react-webapp.git']]]
+
+        sh '''
+            cd $WORKSPACE/react-webapp/ayurveda
+            npm install
+            npm run build
+            npm run build-renderer
+        '''
+        
+        stage 'Build React Renderer Server (branch:ayurveda-prod)'
+        checkout scm: [$class: 'GitSCM', branches: [[name: 'ayurveda-prod']],
+        extensions: [[$class: 'CleanBeforeCheckout'], [$class: 'RelativeTargetDirectory', relativeTargetDir: 'react-render-server']],
+        userRemoteConfigs: [[credentialsId: '86312bd0-85db-4cf0-ba44-73891c19f350', url: 'https://github.com/ayurveda/react-render-server.git']]]        
+
+        sh '''
+            cd $WORKSPACE/react-render-server
+            npm install
+            cp -r $WORKSPACE/react-webapp/ayurveda/renderers .
+            cp -r $WORKSPACE/react-webapp/ayurveda/build/static .
+            aws s3 sync $WORKSPACE/react-webapp/ayurveda/build/ s3://ayurveda-config-prod/build/$BUILD_NUMBER/ --region us-east-1
+            cp config.example.js config.js
+            sed -i -- 's/api.viewlift.com/prod-api.viewlift.com/g' config.js
+            sed -i -- 's/<CACHE_TTL>/1 * 15 * 60 * 1000/g' config.js
+            sed -i -- 's/ayurveda.viewlift.com/ayurvedaprod.viewlift.com/g' config.js
+            sed -i -- 's/<BUILD_NUMBER>/'$BUILD_NUMBER'/g' config.js
+            cat config.js
+        '''
+        
+        stage 'Deploy FrontEnd Webapp (ElasticBeanstalk)'
+        sh '''
+            cd $WORKSPACE/react-render-server
+            yes 2 | ~/.local/bin/eb init "Viewlift Sites" -r us-east-1
+            ~/.local/bin/eb deploy viewliftsites-prod
+            echo 'Deployed Succesfully'
+        '''
+        
+    }
+}
