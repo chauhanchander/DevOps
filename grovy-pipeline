@@ -1,0 +1,47 @@
+node {
+    withCredentials([usernameColonPassword(credentialsId: '86312bd0-85db-4cf0-ba44-73891c19f350', variable: 'USERPASS')]) {
+        // Mark the code checkout 'stage'....
+        // Get some code from a GitHub repository
+
+        stage 'Build React Webapp (branch:ayurveda)'
+        
+        checkout scm: [$class: 'GitSCM', branches: [[name: 'ayurveda']],
+        extensions: [[$class: 'CleanBeforeCheckout'], [$class: 'RelativeTargetDirectory', relativeTargetDir: 'ayurveda']],
+        userRemoteConfigs: [[credentialsId: '86312bd0-85db-4cf0-ba44-73891c19f350', url: 'https://github.com/snagfilms/ayurveda.git']]]
+
+        sh '''
+            cd $WORKSPACE/ayurveda/ayurveda
+            npm install
+            npm run build
+            npm run build-renderer
+        '''
+        
+        stage 'Build React Renderer Server (branch:ayurveda)'
+        checkout scm: [$class: 'GitSCM', branches: [[name: 'ayurveda']],
+        extensions: [[$class: 'CleanBeforeCheckout'], [$class: 'RelativeTargetDirectory', relativeTargetDir: 'react-render-server']],
+        userRemoteConfigs: [[credentialsId: '86312bd0-85db-4cf0-ba44-73891c19f350', url: 'https://github.com/snagfilms/react-render-server.git']]]        
+
+        sh '''
+            cd $WORKSPACE/react-render-server
+            npm install
+            cp -r $WORKSPACE/ayurveda/ayurveda/renderers .
+            cp -r $WORKSPACE/ayurveda/ayurveda/build/static .
+            cp config.example.js config.js
+            aws s3 sync $WORKSPACE/ayurveda/ayurveda/build/ s3://ayurveda-config/build/$BUILD_NUMBER/ --region us-east-1
+            sed -i -- 's/api.viewlift.com/develop-api.viewlift.com/g' config.js
+            sed -i -- 's/ayurveda.viewlift.com/ayurveda.viewlift.com/g' config.js
+            sed -i -- 's/<BUILD_NUMBER>/'$BUILD_NUMBER'/g' config.js
+            sed -i -- 's/<CACHE_TTL>/1 * 15 * 60 * 1000/g' config.js
+            cat config.js
+        '''
+        
+        stage 'Deploy FrontEnd Webapp (ElasticBeanstalk)'
+        sh '''
+            cd $WORKSPACE/react-render-server
+            yes n | ~/.local/bin/eb init ayurveda-dev -r us-east-1
+            ~/.local/bin/eb deploy ayurveda-dev-env
+            echo 'Deployed Succesfully'
+        '''
+        
+    }
+}
