@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#CPUUtilization
+<%= @alarm %> --alarm-name CPU_Utilization_<%= @instances %> --metric-name CPUUtilization --statistic Average --period 300 --threshold 80 --comparison-operator GreaterThanOrEqualToThreshold --dimensions "InstanceId=<%= @instances %>" --alarm-description "CPU Usage Alerts-NextGen Production" --namespace AWS/EC2 --evaluation-periods 1 --alarm-actions arn:aws:sns:us-east-1:053866237477:Viewlift --unit Count --aws-credential-file /home/ubuntu/aws-scripts-mon/awscreds.conf
+#sleep 3
+
+#Network Traffic
+
+#sleep 3
+#Status Check Failed Alarm
+<%= @alarm %> --alarm-name Status_Check_<%= @instances %> --metric-name StatusCheckFailed --statistic Average --period 300 --threshold 1 --comparison-operator GreaterThanOrEqualToThreshold --dimensions "InstanceId=<%= @instances %>" --alarm-description "Status Check Fail-NextGen Production" --namespace AWS/EC2 --evaluation-periods 1 --alarm-actions arn:aws:sns:us-east-1:053866237477:Viewlift --unit Count --aws-credential-file /home/ubuntu/aws-scripts-mon/awscreds.conf
+#sleep 3
+#Netwotk Traffic Outgoing
+
+#sleep 3
+#Status Check Failed Instances
+<%= @alarm %> --alarm-name Instance_Check_<%= @instances %> --metric-name StatusCheckFailed_Instance --statistic Average --period 300 --threshold 1 --comparison-operator GreaterThanOrEqualToThreshold --dimensions "InstanceId=<%= @instances %>" --alarm-description "Status Check for Instances-NextGen Production" --namespace AWS/EC2 --evaluation-periods 1 --alarm-actions arn:aws:sns:us-east-1:053866237477:Viewlift --unit Count --aws-credential-file /home/ubuntu/aws-scripts-mon/awscreds.conf
+#sleep 3
+#Status Check for Failed Systems
+<%= @alarm %> --alarm-name System_Check_<%= @instances %> --metric-name StatusCheckFailed_System --statistic Average --period 300 --threshold 1 --comparison-operator GreaterThanOrEqualToThreshold --dimensions "InstanceId=<%= @instances %>" --alarm-description "Status Check for System-NextGen Production" --namespace AWS/EC2 --evaluation-periods 1 --alarm-actions arn:aws:sns:us-east-1:053866237477:Viewlift --unit Count --aws-credential-file /home/ubuntu/aws-scripts-mon/awscreds.conf
+#sleep 3
+#Disk Space Available
+#<%= @alarm %> --alarm-name Disk_Space_<%= @instances %> --metric-name DiskSpaceAvailable --statistic Average --period 300 --threshold 20 --comparison-operator LessThanOrEqualToThreshold --dimensions "Filesystem=/dev/xvda1,InstanceId=<%= @instances %>,MountPath=/" --alarm-description "Disk Space Available-NextGen Production" --namespace System/Linux --evaluation-periods 1 --alarm-actions arn:aws:sns:us-east-1:053866237477:Viewlift --unit Count --aws-credential-file /home/ubuntu/aws-scripts-mon/awscreds.conf
+#sleep 3
+#RAM Availability
+#<%= @alarm %> --alarm-name RAM_Available_<%= @instances %> --metric-name MemoryAvailable --statistic Average --period 300 --threshold 200 --comparison-operator LessThanOrEqualToThreshold --dimensions "InstanceId=<%= @instances %>" --alarm-description "Free RAM Available-NextGen Production" --namespace System/Linux --evaluation-periods 1 --alarm-actions arn:aws:sns:us-east-1:053866237477:Viewlift --unit Count --aws-credential-file /home/ubuntu/aws-scripts-mon/awscreds.conf
+#sleep 3
+echo "DON'T DELETE THIS FILE. USED FOR CLOUDWATCH ALARMS AUTOMATION. File execution is OK" > /home/alarms

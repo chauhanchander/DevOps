@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+AWS_CLOUDWATCH_HOME=/home/ubuntu/CloudWatch-1.0.20.0
+if [ -n "${AWS_CLOUDWATCH_HOME:+x}" ]; then
+        ${AWS_CLOUDWATCH_HOME}/bin/mon-cmd mon-put-metric-alarm "$@"
+else
+        echo AWS_CLOUDWATCH_HOME is not set
+        exit 1
+fi
