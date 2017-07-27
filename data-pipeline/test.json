@@ -1,0 +1,65 @@
+{
+  "objects": [
+    {
+      "failureAndRerunMode": "CASCADE",
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "pipelineLogUri": "s3://gsk-dev-dp-logs/",
+      "scheduleType": "ONDEMAND",
+      "name": "Default",
+      "id": "Default"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "DP : Data Pipeline Failed to run",
+      "name": "FailureNotify",
+      "id": "ActionId_wMbWd",
+      "message": "Pipeline Id : #{node.@pipelineId}\n\n\"Error for interval #{node.@scheduledStartTime}    -     #{node.@scheduledEndTime}.\"\n\nJob Id:                   #{node.@id}\n\nError Message:   #{node.errorMessage}",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:513220087747:gsk-dev-sns-topic1"
+    },
+    {
+      "subnetId": "subnet-bdeb1c90",
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "imageId": "ami-9eea0188",
+      "securityGroupIds": "sg-0c423276",
+      "instanceType": "m3.xlarge",
+      "name": "gsk-driver-resource1",
+      "id": "ResourceId_HJ6uQ",
+      "type": "Ec2Resource",
+      "region": "us-east-1",
+      "terminateAfter": "1 Day"
+    },
+    {
+      "onFail": {
+        "ref": "ActionId_wMbWd"
+      },
+      "scriptUri": "s3://gsk-dev-dp-scripts/copyjar2local.bash",
+      "name": "movejar2local",
+      "runsOn": {
+        "ref": "ResourceId_HJ6uQ"
+      },
+      "id": "ShellCommandActivityId_vk9Ab",
+      "type": "ShellCommandActivity"
+    },
+    {
+      "stage": "true",
+      "onFail": {
+        "ref": "ActionId_wMbWd"
+      },
+      "scriptUri": "s3://gsk-dev-dp-scripts/on-demand/d_account_segment.bash",
+      "dependsOn": {
+        "ref": "ShellCommandActivityId_vk9Ab"
+      },
+      "maximumRetries": "1",
+      "name": "on-demand-etl",
+      "runsOn": {
+        "ref": "ResourceId_HJ6uQ"
+      },
+      "id": "ShellCommandActivityId_F5vBU",
+      "type": "ShellCommandActivity"
+    }
+  ],
+  "parameters": []
+}

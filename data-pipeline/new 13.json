@@ -1,0 +1,249 @@
+{
+  "objects": [
+    {
+      "failureAndRerunMode": "CASCADE",
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "pipelineLogUri": "s3://gsk-dev-dp-logs/",
+      "scheduleType": "ONDEMAND",
+      "name": "Default",
+      "id": "Default"
+    },
+    {
+      "onFail": {
+        "ref": "ActionId_wMbWd"
+      },
+      "dependsOn": {
+        "ref": "ShellCommandActivityId_vk9Ab"
+      },
+      "maximumRetries": "0",
+      "name": "validateLandFiles",
+      "runsOn": {
+        "ref": "ResourceId_HJ6uQ"
+      },
+      "id": "ShellCommandActivityId_bYB8w",
+      "type": "ShellCommandActivity",
+      "command": "echo \"validated\""
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "onFail": {
+        "ref": "ActionId_wMbWd"
+      },
+      "name": "CheckOnScript",
+      "id": "PreconditionId_zXceb",
+      "type": "S3PrefixNotEmpty",
+      "s3Prefix": "s3://gsk-dev-dp-scripts/"
+    },
+    {
+      "stage": "true",
+      "dependsOn": {
+        "ref": "ShellCommandActivityId_HzmIz"
+      },
+      "onFail": {
+        "ref": "ActionId_wMbWd"
+      },
+      "scriptUri": "s3://#{myDATALOADPATH}",
+      "maximumRetries": "0",
+      "name": "one-time-load",
+      "runsOn": {
+        "ref": "ResourceId_HJ6uQ"
+      },
+      "id": "ShellCommandActivityId_F5vBU",
+      "scriptArgument": [
+        "#{myTENANT_ID}",
+        "#{myTARGET_NAME}",
+        "#{mySOURCE_NAME}",
+        "#{mySOURCE_ENTITY_NAME}",
+        "#{myTARGET_ENTITY_NAME}",
+        "#{myTOTAL_EXECUTOR_CORES}",
+        "#{myEXECUTOR_MEMORY}",
+        "#{myDRIVER_MEMORY}",
+        "#{myBUCKET_NAME}",
+        "#{myEXECUTOR_CORES}",
+        "#{myCONSISTENCY_LEVEL}"
+		"#{myOPTIONAL}"
+      ],
+      "type": "ShellCommandActivity",
+      "onSuccess": {
+        "ref": "ActionId_qcyzD"
+      }
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "DP :#{myTARGET_ENTITY_NAME}  Data Pipeline Failed to run",
+      "name": "FailureNotify",
+      "id": "ActionId_wMbWd",
+      "message": "Pipeline Id : #{node.@pipelineId}\n\n\"Error for interval #{node.@scheduledStartTime}    -     #{node.@scheduledEndTime}.\"\n\nJob Id:                   #{node.@id}\n\nError Message:   #{node.errorMessage}",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:513220087747:gsk-dev-sns-topic1"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "DP : #{myTARGET_ENTITY_NAME} Successful Run",
+      "name": "SuccessNotify",
+      "id": "ActionId_qcyzD",
+      "message": "Pipeline Id : #{node.@pipelineId}\n\n\"Between these times :  #{node.@actualStartTime}    -     #{node.@actualEndTime}.\"\n\nJob Id:                   #{node.@id}\n",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:513220087747:gsk-dev-sns-topic1"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "onFail": {
+        "ref": "ActionId_wMbWd"
+      },
+      "name": "CheckOnJar",
+      "id": "PreconditionId_AeerY",
+      "s3Prefix": "s3://gsk-dev-dp-jars/",
+      "type": "S3PrefixNotEmpty"
+    },
+    {
+      "subnetId": "subnet-bdeb1c90",
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "imageId": "ami-9eea0188",
+      "securityGroupIds": "sg-0c423276",
+      "instanceType": "m3.xlarge",
+      "name": "gsk-driver-resource1",
+      "id": "ResourceId_HJ6uQ",
+      "type": "Ec2Resource",
+      "region": "us-east-1",
+      "terminateAfter": "1 Day"
+    },
+    {
+      "scriptUri": "s3://#{myCOPY2LOCALPATH}",
+      "onFail": {
+        "ref": "ActionId_wMbWd"
+      },
+      "maximumRetries": "0",
+      "name": "movejar2local",
+      "runsOn": {
+        "ref": "ResourceId_HJ6uQ"
+      },
+      "id": "ShellCommandActivityId_vk9Ab",
+      "precondition": [
+        {
+          "ref": "PreconditionId_zXceb"
+        },
+        {
+          "ref": "PreconditionId_AeerY"
+        }
+      ],
+      "type": "ShellCommandActivity"
+    },
+    {
+      "stage": "true",
+      "onFail": {
+        "ref": "ActionId_wMbWd"
+      },
+      "scriptUri": "s3://gsk-dev-dp-scripts/preprocess.bash",
+      "dependsOn": {
+        "ref": "ShellCommandActivityId_bYB8w"
+      },
+      "maximumRetries": "0",
+      "name": "preprocessor_one-time-load",
+      "id": "ShellCommandActivityId_HzmIz",
+      "runsOn": {
+        "ref": "ResourceId_HJ6uQ"
+      },
+      "scriptArgument": [
+        "#{format(minusHours(@scheduledStartTime,5),'YYYYMMdd')}",
+        "#{mySOURCE_ENTITY_NAME}",
+        "#{mySource}",
+        "#{myBUCKET_SUBFOLDER}"
+      ],
+      "type": "ShellCommandActivity"
+    }
+  ],
+  "parameters": [
+    {
+      "default": "GSKDev",
+      "id": "myBUCKET_NAME",
+      "type": "String"
+    },
+    {
+      "default": "none",
+      "id": "myBUCKET_SUBFOLDER",
+      "type": "String"
+    },
+    {
+      "default": "LOCAL_QUORUM",
+      "id": "myCONSISTENCY_LEVEL",
+      "type": "String"
+    },
+    {
+      "default": "10",
+      "id": "myTOTAL_EXECUTOR_CORES",
+      "type": "String"
+    },
+    {
+      "default": "32",
+      "id": "myCONCURRENT_WRITES",
+      "type": "String"
+    },
+    {
+      "default": "ods",
+      "id": "myTARGET_NAME",
+      "type": "String"
+    },
+    {
+      "default": "none",
+      "id": "myTARGET_ENTITY_NAME",
+      "type": "String"
+    },
+    {
+      "default": "4G",
+      "id": "myDRIVER_MEMORY",
+      "type": "String"
+    },
+    {
+      "default": "1",
+      "id": "myTENANT_ID",
+      "type": "String"
+    },
+    {
+      "default": "s3",
+      "id": "mySOURCE_NAME",
+      "type": "String"
+    },
+    {
+      "default": "12G",
+      "id": "myEXECUTOR_MEMORY",
+      "type": "String"
+    },
+    {
+      "default": "10",
+      "id": "myEXECUTOR_CORES",
+      "type": "String"
+    },
+    {
+      "default": "none",
+      "id": "mySOURCE_ENTITY_NAME",
+      "type": "String"
+    },
+	{
+      "default": "none",
+      "id": "myOPTIONAL",
+      "type": "String"
+    }
+  ],
+  "values": {
+    "myEXECUTOR_MEMORY": "12G",
+    "mySource": "EAL",
+    "myCOPY2LOCALPATH": "GSK/Dev/Code/Scripts/copyjar2local.bash",
+    "myDATALOADPATH": "GSK/Dev/Code/Scripts/dataloadind_1.bash",
+    "mySOURCE_NAME": "s3",
+    "myBUCKET_NAME": "GSK",
+    "myTARGET_ENTITY_NAME": "d_account",
+    "myCONCURRENT_WRITES": "32",
+    "mySOURCE_ENTITY_NAME": "Accounts.txt",
+    "myBUCKET_SUBFOLDER": "notapplicable",
+    "myCONSISTENCY_LEVEL": "LOCAL_QUORUM",
+    "myEXECUTOR_CORES": "8",
+    "myTOTAL_EXECUTOR_CORES": "10",
+    "myTARGET_NAME": "ods",
+    "myTENANT_ID": "1",
+    "myDRIVER_MEMORY": "4G"
+	"myOPTIONAL": "Y"
+  }
+}
