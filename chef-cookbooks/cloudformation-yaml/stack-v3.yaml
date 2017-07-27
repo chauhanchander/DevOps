@@ -1,0 +1,163 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Viewlift Acadia Stack Version 3'
+Metadata:
+  'AWS::CloudFormation::Interface':
+    ParameterGroups:
+    - Label:
+        default: 'VPC Parameters'
+      Parameters:
+      - ClassB
+      - VPCName
+      - Environment
+      - ApiId
+      - DiscoveryAPIId
+      - KmsKey
+Parameters:
+  ClassB:
+    Description: 'Class B of VPC (10.XXX.0.0/16)'
+    Type: Number
+    Default: 100
+    ConstraintDescription: 'Must be in the range [0-255]'
+    MinValue: 0
+    MaxValue: 255
+  VPCName:
+    Description: 'Identifiable name for VPC'
+    Type: String
+    Default: 'Viewlift Acadia VPC'
+  Environment:
+    Description: 'Environment Identifier'
+    Type: String
+    Default: 'prod'
+    AllowedValues:
+    - develop
+    - release
+    - prod
+  DiscoveryAPIId:
+    Description: 'Identifier for the Discovery Service API.'
+    Type: String  
+  ApiId:
+    Description: 'API Gateway Identifier'
+    Type: String
+    Default: 'y5gtex3nl9'
+  KmsKey:
+    Description: 'Last part of KMS Key Arn'
+    Type: String
+    Default: '2b00e907-b58e-48da-905e-e408d0e81c11'  
+Mappings:
+  EnvironmentMap:
+    develop:
+      tablePrefix: 'DEVELOP'
+    release:
+      tablePrefix: 'RELEASE'
+    prod:
+      tablePrefix: 'PROD'
+  RegionMap:
+    us-east-1:
+      bucketName: 'viewlift-acadia'
+    us-west-2:
+      bucketName: 'or-viewlift-acadia'
+Resources:
+  Network:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: !Sub 'https://s3.amazonaws.com/viewlift-acadia/stack/vpc-${Environment}.yaml'
+      TimeoutInMinutes: 90
+      Parameters:
+        ClassB: !Sub ${ClassB}
+        VPCName: !Sub '${VPCName}'
+  ContentServiceTables:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: 'https://s3.amazonaws.com/viewlift-acadia/services/content-service/tables.yaml'
+      TimeoutInMinutes: 90
+      Parameters:
+        Environment: !Ref Environment
+        TablePrefix: !FindInMap [ EnvironmentMap, !Ref "Environment", tablePrefix ]
+  ContentCacheService:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: 'https://s3.amazonaws.com/viewlift-acadia/services/content-service/cache.yaml'
+      TimeoutInMinutes: 90
+      Parameters:
+        Environment: !Ref Environment
+        VpcId: !GetAtt Network.Outputs.VpcId
+        SubnetIds: !GetAtt Network.Outputs.LambdaSubnetsPublic
+        NumCacheNodes: 2
+        CacheNodeType: 'cache.r3.large'
+        CacheSubnetGroupName: !Sub 'viewlift-redis-${Environment}'
+  ContentServiceFunctions:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: 'https://s3.amazonaws.com/viewlift-acadia/services/content-service/services.yaml'
+      TimeoutInMinutes: 90
+      Parameters:
+        Environment: !Ref Environment
+        ContentMetadataStreamArn: !GetAtt ContentServiceTables.Outputs.ContentMetadataTableStream
+        ModuleDataTableStreamArn: !GetAtt ContentServiceTables.Outputs.ModuleDataTableStream
+        SiteConfigStreamArn: !GetAtt ContentServiceTables.Outputs.SiteConfigTableStream
+        VideoWatchHistoryStreamArn: !GetAtt ContentServiceTables.Outputs.VideoWatchHistoryTableStream
+        FunctionCodeBucketName: !FindInMap [RegionMap, !Ref "AWS::Region", bucketName]
+        ApiId: !Ref ApiId
+        DiscoveryAPIId: !Ref DiscoveryAPIId
+        KmsKeyArn: !Sub arn:aws:kms:${AWS::Region}:${AWS::AccountId}:key/${KmsKey}
+        RedisHost: !GetAtt ContentCacheService.Outputs.PrimaryEndPointHostName
+        RedisPort: !GetAtt ContentCacheService.Outputs.PrimaryEndPointPort
+        SecurityGroupIds: !Join [ ",", [ !GetAtt Network.Outputs.DefaultSecurityGroup, !GetAtt ContentCacheService.Outputs.RedisSecurityGroup ] ]
+        SubnetIds: !GetAtt Network.Outputs.LambdaSubnetsPrivate
+
+
+Outputs:
+  VPCID:
+    Value: !GetAtt 'Network.Outputs.VpcId'
+  DefaultSecurityGroup:
+    Value: !GetAtt 'Network.Outputs.DefaultSecurityGroup'
+    Export:
+      Name: !Sub '${AWS::StackName}-DefaultSecurityGroup'
+  KmsKeyArn: 
+    Value: !Sub arn:aws:kms:${AWS::Region}:${AWS::AccountId}:key/${KmsKey}
+    Export:
+      Name: !Sub '${AWS::StackName}-KmsKeyArn'
+  LambdaSubnetsPrivate:
+    Value: !GetAtt 'Network.Outputs.LambdaSubnetsPrivate'
+    Export:
+      Name: !Sub '${AWS::StackName}-LambdaSubnetsPrivate'
+  SubnetAPrivate:
+    Description: 'Subnet A private.'
+    Value: !GetAtt 'Network.Outputs.SubnetAPrivate'
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetAPrivate'
+  SubnetCPrivate:
+    Description: 'Subnet C private.'
+    Value: !GetAtt 'Network.Outputs.SubnetCPrivate'
+    Export:
+      Name: !Sub '${AWS::StackName}-SubnetCPrivate'    
+  CacheSecurityGroupId: 
+    Value: !GetAtt ContentCacheService.Outputs.RedisSecurityGroup
+    Export:
+      Name: !Sub '${AWS::StackName}-CacheSecurityGroupId'
+  CacheEndpointHostName:
+    Value: !GetAtt ContentCacheService.Outputs.PrimaryEndPointHostName
+    Export:
+      Name: !Sub '${AWS::StackName}-CacheEndpointHostName'
+  CacheEndpointPort:
+    Value: !GetAtt ContentCacheService.Outputs.PrimaryEndPointPort
+    Export:
+      Name: !Sub '${AWS::StackName}-CacheEndpointPort'
+  ContentMetadataTableStream:
+    Value: !GetAtt 'ContentServiceTables.Outputs.ContentMetadataTableStream'
+    Export:
+      Name: !Sub '${AWS::StackName}-ContentMetadataStreamArn'   
+  SiteConfigTableStream:
+    Value: !GetAtt 'ContentServiceTables.Outputs.SiteConfigTableStream'
+    Export:
+      Name: !Sub '${AWS::StackName}-SiteConfigStreamArn'
+  ModuleDataTableStream:
+    Value: !GetAtt 'ContentServiceTables.Outputs.ModuleDataTableStream'
+    Export:
+      Name: !Sub '${AWS::StackName}-ModuleDataTableStreamArn'
+  VideoWatchHistoryTableStream:
+    Value: !GetAtt 'ContentServiceTables.Outputs.VideoWatchHistoryTableStream'
+    Export:
+      Name: !Sub '${AWS::StackName}-VideoWatchHistoryStreamArn'

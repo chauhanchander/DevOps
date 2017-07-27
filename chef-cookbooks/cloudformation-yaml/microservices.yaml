@@ -1,0 +1,25 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Viewlift Acadia Microservices'
+Metadata:
+  'AWS::CloudFormation::Interface':
+    ParameterGroups:
+    - Label:
+        default: 'VPC Parameters'
+      Parameters:
+      - Environment
+Mappings:
+  EnvironmentMap:
+    develop:
+      stackName: 'viewlift-acadia-release-stack'
+    release:
+      stackName: 'viewlift-acadia-release-stack'
+    prod:
+      stackName: 'viewlift-acadia-prod-stack'
+Resources:
+  ContentServiceFunctions:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: 'https://s3.amazonaws.com/viewlift-acadia/services/content-service/functions.yaml'
+      TimeoutInMinutes: 90

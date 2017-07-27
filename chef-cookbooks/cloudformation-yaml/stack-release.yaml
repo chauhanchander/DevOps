@@ -1,0 +1,88 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Viewlift Acadia Release Stack'
+Metadata:
+  'AWS::CloudFormation::Interface':
+    ParameterGroups:
+    - Label:
+        default: 'VPC Parameters'
+      Parameters:
+      - ClassB
+      - VPCName
+      - Environment
+Parameters:
+  ClassB:
+    Description: 'Class B of VPC (10.XXX.0.0/16)'
+    Type: Number
+    Default: 100
+    ConstraintDescription: 'Must be in the range [0-255]'
+    MinValue: 0
+    MaxValue: 255
+  VPCName:
+    Description: 'Identifiable name for VPC'
+    Type: String
+    Default: 'Viewlift Acadia Release'
+  Environment:
+    Description: 'Environment Identifier'
+    Type: String
+    Default: 'prod'
+    AllowedValues:
+    - develop
+    - release
+    - prod
+Mappings: 
+  EnvironmentMap: 
+    develop:
+      tablePrefix: 'DEVELOP'
+    release:
+      tablePrefix: 'RELEASE'
+    prod:
+      tablePrefix: 'PROD'    
+Resources:
+  Network:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: !Sub 'https://s3.amazonaws.com/viewlift-acadia/stack/vpc-release.yaml'
+      TimeoutInMinutes: 90
+      Parameters:
+        ClassB: !Sub ${ClassB}
+        VPCName: !Sub '${VPCName}'
+  ContentServiceTables:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: 'https://s3.amazonaws.com/viewlift-acadia/services/content-service/tables.yaml'
+      TimeoutInMinutes: 90
+      Parameters:
+        Environment: 'release'
+        TablePrefix: 'RELEASE'
+  ContentCacheService:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: 'https://s3.amazonaws.com/viewlift-acadia/services/content-service/cache.yaml'
+      TimeoutInMinutes: 90
+      Parameters:
+        Environment: 'release'
+        VpcId: !GetAtt Network.Outputs.VpcId
+        SubnetIds: !GetAtt Network.Outputs.LambdaSubnetsPublic
+        NumCacheNodes: 2
+        CacheNodeType: 'cache.r3.large'
+        CacheSubnetGroupName: 'viewlift-redis-release'
+
+Outputs:
+  VPCID:
+    Value: !GetAtt 'Network.Outputs.VpcId'
+  DefaultSecurityGroup:
+    Value: !GetAtt 'Network.Outputs.DefaultSecurityGroup'
+  ContentMetadataTableStream:
+    Value: !GetAtt 'ContentServiceTables.Outputs.ContentMetadataTableStream'
+    Export:
+      Name: !Sub '${AWS::StackName}-ContentMetadataStreamArn'
+  SiteConfigTableStream:
+    Value: !GetAtt 'ContentServiceTables.Outputs.SiteConfigTableStream'
+    Export:
+      Name: !Sub '${AWS::StackName}-SiteConfigStreamArn'
+  VideoWatchHistoryTableStream:
+    Value: !GetAtt 'ContentServiceTables.Outputs.VideoWatchHistoryTableStream'
+    Export:
+      Name: !Sub '${AWS::StackName}-VideoWatchHistoryStreamArn'
