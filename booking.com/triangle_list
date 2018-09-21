@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+import math
+import os
+import random
+import re
+import sys
+
+def getType(abc):
+    print (abc)
+    resultList = []
+    triangle = []
+    for triangleTest in abc:
+        triangle = triangleTest.split()
+        if triangle[0] == triangle[1] == triangle[2]:
+            resultList.append("Equilateral")
+        if triangle[0] != triangle[1] != triangle[2]:
+            resultList.append("None of these")
+        if triangle[0] == triangle[1]:
+            resultList.append("Isosceles")
+    return resultList
+
+if __name__ == '__main__':
+
+    abc_count = int(input())
+    abc = []
+    for _ in range(abc_count):
+        abc_item = input()
+        abc.append(abc_item)
+    res = getType(abc)
+    print (res)

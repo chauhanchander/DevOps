@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import collections
+
+def merge(intervals):
+
+    sortedintervals = collections.OrderedDict(sorted(intervals.items()))
+    print (sortedintervals)
+    merged = []
+    for interval in sortedintervals:
+        if not merged or merged[-1].end < interval.start:
+            merged.append(interval)
+        else:
+            merged[-1].end = max(merged[-1].end, interval.end)
+
+    return merged
+
+
+if __name__ == '__main__':
+
+
+    print ("Enter the size of the list")
+    N = int(input())
+    hotel_ranking = {}
+    for i in range(0, N):
+        i = input()
+        hotelkey, hotelvalue = i.split() 
+        hotel_ranking[hotelkey] = hotelvalue
+
+    print (hotel_ranking)
+
+    ranking_result = merge(hotel_ranking)
+    print (ranking_result)
+

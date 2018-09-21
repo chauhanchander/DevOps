@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+import itertools
+
+def combinations_algo(STRINGS_LIST):
+    RESULT = [STRINGS_LIST]
+    for i in range(1, len(STRINGS_LIST)):
+        RESULT.extend(list(itertools.combinations(STRINGS_LIST, i)))
+    return RESULT
+
+if __name__ == "__main__":
+    STRINGS_LIST = []
+    STRING_INPUT = input()
+
+# Creating list
+    for char in STRING_INPUT:
+        STRINGS_LIST += char
+
+    STRINGS_LIST.sort()
+    RESULT = combinations_algo(STRINGS_LIST)
+    FIRST_ELEMENT = "".join(RESULT.pop(0))
+
+    for i in RESULT:
+        sorted_list = sorted(i)
+        print("".join(sorted_list))
+    print(FIRST_ELEMENT)

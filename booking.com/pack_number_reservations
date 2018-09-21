@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+
+import sys
+import collections
+
+def Convert(tup, di):
+    for a, b in tup:
+        di.setdefault(a, []).append(b)
+    return di
+
+if __name__ == '__main__':
+
+    reservationlist = []
+    reservationlist = sys.argv[1].split(',')
+    print (reservationlist)
+    #sorted_reservation = sorted(reservationlist, key=lambda tup: tup[0])
+    counterlist = collections.Counter(reservationlist)
+    print(counterlist)
+    print (counterlist.most_common())
+    for i in counterlist.most_common():
+        if i[1] == 1:
+            print_format = "{},"
+            print (print_format.format(str(i[0])), end='')
+        else:
+            print_format = "{}:{},"
+            print (print_format.format(str(i[0]),str(i[1])), end='')

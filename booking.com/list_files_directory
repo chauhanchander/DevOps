@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import sys
+import os
+import collections
+
+if __name__ == '__main__':
+
+    directoryPath = sys.argv[1]
+    filesArray = os.listdir(directoryPath)
+    for filesCheck in filesArray:
+        if (os.path.isdir(filesCheck)):
+            filesArray.remove(filesCheck)
+        if (os.path.islink(filesCheck)):
+            linkFilesPath = os.readlink(filesCheck).split('/')
+            filesArray.remove(filesCheck)
+            filesArray.insert(len(filesArray),linkFilesPath[-1]) 
+    
+    filesArray.sort()
+    for files in filesArray:
+        print (files)

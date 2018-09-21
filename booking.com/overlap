@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+
+def getOverlap(a, b):
+    return max(0, min(a[1], b[1]) - max(a[0], b[0]))
+
+overlap_result = getOverlap([2, 4], [3, 5])
+print (overlap_result)
